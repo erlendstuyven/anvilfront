@@ -1,0 +1,8 @@
+{
+  "childAllowances": [
+    { "amount": "160"},
+    { "amount": "100"},
+    { "amount": "200"},
+    { "amount": "115"}
+  ]
+}

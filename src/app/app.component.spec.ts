@@ -2,12 +2,23 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import {ChildAllowanceComponent} from "./childallowance/child-allowance.component";
+import {ChildAllowanceService} from "./childallowance/child-allowance.service";
+import {Http, ConnectionBackend, RequestOptions, BaseRequestOptions} from "@angular/http";
+import {MockBackend} from "@angular/http/testing";
 
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      providers: [
+        { provide: Http, useFactory: (backend: ConnectionBackend, defaultOptions: BaseRequestOptions) => {
+          return new Http(backend, defaultOptions); }, deps: [MockBackend, BaseRequestOptions] },
+        { provide: BaseRequestOptions, useClass: BaseRequestOptions },
+        { provide: MockBackend, useClass: MockBackend },
+        ChildAllowanceService],
       declarations: [
-        AppComponent
+        AppComponent,
+        ChildAllowanceComponent
       ],
     });
     TestBed.compileComponents();
