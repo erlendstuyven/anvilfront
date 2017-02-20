@@ -2,11 +2,11 @@
   child-allowances!
 </p>
 
-<button (click)="calculate()">Calculate</button>
+<button (click)="calculate()" id="calculateButton">Calculate</button>
 
 <div *ngFor="let childAllowance of childAllowances?.childAllowances; let i = index">
     <ul>
-      <li>Amount: {{childAllowance.amount}}</li>
+      <li id="amount{{i}}">{{childAllowance.amount}}</li>
     </ul>
 </div>
 

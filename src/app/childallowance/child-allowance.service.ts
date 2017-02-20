@@ -12,8 +12,7 @@ export class ChildAllowanceService {
 
   getChildAllowance = () : Observable<ChildAllowances> => {
     return this.http
-      .get('https://api.myjson.com/bins/m5ict')
-      // .get('api/child-allowance')
+      .get('api/child-allowance')
       .map(httpResponse => {
         let childAllowances = new ChildAllowances();
         childAllowances.childAllowances = [];
