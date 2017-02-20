@@ -18,7 +18,7 @@ export class ChildAllowanceService {
         childAllowances.childAllowances = [];
 
         httpResponse.json().childAllowances.forEach( childAllowanceJson => {
-          childAllowances.childAllowances.push(new ChildAllowance(childAllowanceJson.amount));
+          childAllowances.childAllowances.push(new ChildAllowance(childAllowanceJson.amount, childAllowanceJson.inss));
         });
 
         return childAllowances;

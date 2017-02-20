@@ -16,4 +16,7 @@ export class ChildAllowancePage {
     return element(by.id('amount' + index)).getText();
   }
 
+  getInss(index) {
+    return element(by.id('inss' + index)).getText();
+  }
 }

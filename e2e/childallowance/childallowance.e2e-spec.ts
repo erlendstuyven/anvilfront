@@ -19,7 +19,7 @@ describe('File Form Page', function () {
   });
 
   it('should be able to enter inss', () => {
-    let newVar = {childAllowances:[{amount:160},{amount:100},{amount:200},{amount:115}]};
+    let newVar = {childAllowances:[{amount:160, inss:1234},{amount:100, inss:1111},{amount:200, inss:2222},{amount:115, inss:3333}]};
 
     mockServerClient('localhost', 1080).mockSimpleResponse('/api/child-allowance', newVar, 200);
 
@@ -30,6 +30,10 @@ describe('File Form Page', function () {
     expect(page.getAmount(1)).toEqual('100');
     expect(page.getAmount(2)).toEqual('200');
     expect(page.getAmount(3)).toEqual('115');
+    expect(page.getInss(0)).toEqual('1234');
+    expect(page.getInss(1)).toEqual('1111');
+    expect(page.getInss(2)).toEqual('2222');
+    expect(page.getInss(3)).toEqual('3333');
   });
 
 });

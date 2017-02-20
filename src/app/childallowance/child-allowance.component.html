@@ -6,7 +6,7 @@
 
 <div *ngFor="let childAllowance of childAllowances?.childAllowances; let i = index">
     <ul>
-      <li id="amount{{i}}">{{childAllowance.amount}}</li>
+      <li> INSZ: <span id="inss{{i}}">{{childAllowance.inss}}</span>, Bedrag: <span id="amount{{i}}">{{childAllowance.amount}}</span></li>
     </ul>
 </div>
 
