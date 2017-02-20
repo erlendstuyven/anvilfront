@@ -6,18 +6,20 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import {ChildAllowanceService} from "./childallowance/child-allowance.service";
 import { ChildAllowanceComponent } from './childallowance/child-allowance.component';
+import {ChildAllowanceModule} from "./childallowance/childallowance.module";
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ChildAllowanceComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule,
+    ChildAllowanceModule.forRoot()
   ],
-  providers: [ChildAllowanceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

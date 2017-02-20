@@ -6,16 +6,13 @@ import {ChildAllowanceComponent} from "./childallowance/child-allowance.componen
 import {ChildAllowanceService} from "./childallowance/child-allowance.service";
 import {Http, ConnectionBackend, RequestOptions, BaseRequestOptions} from "@angular/http";
 import {MockBackend} from "@angular/http/testing";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        { provide: Http, useFactory: (backend: ConnectionBackend, defaultOptions: BaseRequestOptions) => {
-          return new Http(backend, defaultOptions); }, deps: [MockBackend, BaseRequestOptions] },
-        { provide: BaseRequestOptions, useClass: BaseRequestOptions },
-        { provide: MockBackend, useClass: MockBackend },
-        ChildAllowanceService],
+      imports: [RouterTestingModule],
+      providers: [ChildAllowanceService],
       declarations: [
         AppComponent,
         ChildAllowanceComponent
@@ -28,18 +25,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  }));
-
-  it(`should have as title 'app works!'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app works!');
-  }));
-
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
   }));
 });
