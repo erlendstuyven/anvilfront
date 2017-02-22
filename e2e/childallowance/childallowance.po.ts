@@ -13,7 +13,7 @@ export class ChildAllowancePage {
   };
 
   getAmount(index) {
-    return element(by.id('amount' + index)).getText();
+    return element(by.id('total' + index)).getText();
   }
 
   getInss(index) {

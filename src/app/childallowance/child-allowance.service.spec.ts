@@ -27,7 +27,7 @@ describe('ChildAllowanceService', () => {
   it('should perform a http get call to api/calculation and should return a list of ChildAllowances', (done) => {
     inject([MockBackend, ChildAllowanceService], (mockBackend: MockBackend, service: ChildAllowanceService) => {
       let childAllowances: ChildAllowances = new ChildAllowances();
-      childAllowances.childAllowances = [ new ChildAllowance("160.00", '1234'), new ChildAllowance("150.00", '1111') ];
+      childAllowances.calculations = [ new ChildAllowance("160.00", '1234'), new ChildAllowance("150.00", '1111') ];
 
       mockBackend.connections.subscribe((connection) => {
         let request = connection.request;

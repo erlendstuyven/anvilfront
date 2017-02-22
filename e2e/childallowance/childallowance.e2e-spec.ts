@@ -19,9 +19,9 @@ describe('File Form Page', function () {
   });
 
   it('should be able to enter inss', () => {
-    let newVar = {childAllowances:[{amount:160, inss:1234},{amount:100, inss:1111},{amount:200, inss:2222},{amount:115, inss:3333}]};
+    let newVar = {calculations:[{total:160, inss:1234},{total:100, inss:1111},{total:200, inss:2222},{total:115, inss:3333}]};
 
-    mockServerClient('localhost', 1080).mockSimpleResponse('/api/child-allowance', newVar, 200);
+    mockServerClient('localhost', 1080).mockSimpleResponse('/api/calculation', newVar, 200);
 
     page.navigateTo();
     page.calculate();

@@ -11,7 +11,7 @@ describe('ChildAllowanceComponent', () => {
   let fixture: ComponentFixture<ChildAllowanceComponent>;
 
   let expectedChildAllowances = new ChildAllowances();
-  expectedChildAllowances.childAllowances = [ new ChildAllowance("160.00"), new ChildAllowance("150.00") ];
+  expectedChildAllowances.calculations = [ new ChildAllowance("160.00"), new ChildAllowance("150.00") ];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
