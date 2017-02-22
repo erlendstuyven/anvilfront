@@ -24,7 +24,7 @@ describe('ChildAllowanceService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('should perform a http get call to api/child-allowance and should return a list of ChildAllowances', (done) => {
+  it('should perform a http get call to api/calculation and should return a list of ChildAllowances', (done) => {
     inject([MockBackend, ChildAllowanceService], (mockBackend: MockBackend, service: ChildAllowanceService) => {
       let childAllowances: ChildAllowances = new ChildAllowances();
       childAllowances.childAllowances = [ new ChildAllowance("160.00", '1234'), new ChildAllowance("150.00", '1111') ];
@@ -32,8 +32,8 @@ describe('ChildAllowanceService', () => {
       mockBackend.connections.subscribe((connection) => {
         let request = connection.request;
 
-        expect(request.url).toEqual('api/child-allowance');
-        expect(request.method).toEqual(RequestMethod.Get);
+        expect(request.url).toEqual('api/calculation');
+        expect(request.method).toEqual(RequestMethod.Post);
 
         connection.mockRespond(new Response(new ResponseOptions({
           status: 200,

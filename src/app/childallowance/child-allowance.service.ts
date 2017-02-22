@@ -12,7 +12,7 @@ export class ChildAllowanceService {
 
   getChildAllowance = () : Observable<ChildAllowances> => {
     return this.http
-      .get('api/child-allowance')
+      .post('api/calculation')
       .map(httpResponse => {
         let childAllowances = new ChildAllowances();
         childAllowances.childAllowances = [];
