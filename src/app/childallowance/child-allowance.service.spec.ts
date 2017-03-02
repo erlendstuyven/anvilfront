@@ -33,7 +33,7 @@ describe('ChildAllowanceService', () => {
         let request = connection.request;
 
         expect(request.url).toEqual('api/calculation');
-        expect(request.method).toEqual(RequestMethod.Post);
+        expect(request.method).toEqual(RequestMethod.Get);
 
         connection.mockRespond(new Response(new ResponseOptions({
           status: 200,
