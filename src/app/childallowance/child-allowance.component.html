@@ -1,18 +1,35 @@
-<p>
-  child-allowances!
-</p>
-
-<form>
-<input type="number" id="year" name="year" [(ngModel)]="year"/>
-<input type="number" id="month" name="month" [(ngModel)]="month"/>
-</form>
-
-<button (click)="calculate()" id="calculateButton">Calculate</button>
-
-<div *ngFor="let childAllowance of childAllowances?.calculations; let i = index">
-    <ul>
-      <li> INSZ: <span id="inss{{i}}">{{childAllowance.inss}}</span>, Bedrag: &euro;<span id="total{{i}}">{{childAllowance.total}}</span></li>
-    </ul>
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Berekenen</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <form class="form-inline">
+      <div class="form-group">
+        <label class="sr-only" for="month">maand</label>
+        <input type="number" class="form-control" id="month" name="month" [(ngModel)]="month" placeholder="maand">
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="year">jaar</label>
+        <input type="number" class="form-control" id="year" name="year" [(ngModel)]="year" placeholder="jaar">
+      </div>
+      <button (click)="calculate()" id="calculateButton" class="btn btn-primary">Bereken</button>
+    </form>
+  </div>
 </div>
 
-
+<div *ngIf="childAllowances" class="row" style="padding-top:20px">
+  <div class="col-sm-12">
+    <table class="table table-bordered">
+      <tr>
+        <th>INSZ</th>
+        <th>BEDRAG</th>
+      </tr>
+      <tr *ngFor="let childAllowance of childAllowances?.calculations; let i = index">
+        <td><span id="inss{{i}}">{{childAllowance.inss}}</span></td>
+        <td>&euro; <span id="total{{i}}">{{childAllowance.total}}</span></td>
+      </tr>
+    </table>
+  </div>
+</div>
