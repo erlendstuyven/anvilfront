@@ -2,8 +2,8 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import {ChildAllowanceComponent} from "./childallowance/child-allowance.component";
-import {ChildAllowanceService} from "./childallowance/child-allowance.service";
+import {CalculationComponent} from "./calculation/calculation.component";
+import {CalculationService} from "./calculation/calculation.service";
 import {Http, ConnectionBackend, RequestOptions, BaseRequestOptions} from "@angular/http";
 import {MockBackend} from "@angular/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
@@ -13,10 +13,10 @@ describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, RouterTestingModule],
-      providers: [ChildAllowanceService],
+      providers: [CalculationService],
       declarations: [
         AppComponent,
-        ChildAllowanceComponent
+        CalculationComponent
       ],
     });
     TestBed.compileComponents();

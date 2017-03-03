@@ -1,17 +1,17 @@
-import {ChildAllowancePage} from "./childallowance.po";
+import {CalculationPage} from "./calculation.po";
 
 var mockserver = require('mockserver-grunt');
 var mockServerClient = require('mockserver-client').mockServerClient;
 
 describe('File Form Page', function () {
-  let page: ChildAllowancePage;
+  let page: CalculationPage;
 
   beforeAll((done) => {
     mockserver.start_mockserver({serverPort: 1080}).then(done);
   });
 
   beforeEach(() => {
-    page = new ChildAllowancePage();
+    page = new CalculationPage();
   });
 
   afterAll((done) => {

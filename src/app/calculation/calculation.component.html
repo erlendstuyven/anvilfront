@@ -19,26 +19,26 @@
   </div>
 </div>
 
-<div *ngIf="childAllowances" class="row" style="padding-top: 50px">
+<div *ngIf="calculations" class="row" style="padding-top: 50px">
   <div class="col-sm-12">
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-      <div class="panel panel-default" *ngFor="let childAllowance of childAllowances?.calculations; let i = index">
+      <div class="panel panel-default" *ngFor="let calculation of calculations?.calculations; let i = index">
         <div class="panel-heading" role="tab" id="heading{{i}}">
           <h4 class="panel-title">
             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{i}}" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
-              <b>INSZ: <span id="inss{{i}}">{{childAllowance.inss}}</span></b>
-              <b class="pull-right">&euro;<span id="total{{i}}">{{childAllowance.total}}</span></b>
+              <b>INSZ: <span id="inss{{i}}">{{calculation.inss}}</span></b>
+              <b class="pull-right">&euro;<span id="total{{i}}">{{calculation.total}}</span></b>
             </a>
           </h4>
         </div>
         <div id="collapse{{i}}" class="panel-collapse collapse" role="tabpanel" [attr.aria-labelledby]="'heading' + i">
           <div class="panel-body">
-            <table *ngIf="childAllowance?.allowances" class="panel-body table table-condensed table-hover">
+            <table *ngIf="calculation?.allowances" class="panel-body table table-condensed table-hover">
               <tr>
                 <td><b>toeslag</b></td>
                 <td align="right"><b>bedrag</b></td>
               </tr>
-              <tr *ngFor="let allowance of childAllowance?.allowances; let j = index">
+              <tr *ngFor="let allowance of calculation?.allowances; let j = index">
                 <td>{{allowance.type}}</td>
                 <td align="right">&euro;{{allowance.value}}</td>
               </tr>

@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [{
-  path: 'childallowance',
-  loadChildren: 'app/childallowance/childallowance.module#ChildAllowanceModule'
+  path: 'calculation',
+  loadChildren: 'app/calculation/calculation.module#CalculationModule'
 }];
 
 @NgModule({

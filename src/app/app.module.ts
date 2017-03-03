@@ -5,7 +5,7 @@ import {HttpModule} from '@angular/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {AppComponent} from './app.component';
-import {ChildAllowanceModule} from "./childallowance/childallowance.module";
+import {CalculationModule} from "./calculation/calculation.module";
 import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
@@ -17,7 +17,7 @@ import {AppRoutingModule} from "./app-routing.module";
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    ChildAllowanceModule.forRoot(),
+    CalculationModule.forRoot(),
     NgbModule.forRoot()
   ],
   bootstrap: [AppComponent]

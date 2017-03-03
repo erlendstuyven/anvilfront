@@ -1,6 +1,6 @@
 import {browser, element, by} from 'protractor';
 
-export class ChildAllowancePage {
+export class CalculationPage {
 
   private calculateButton = element(by.id('calculateButton'));
   private yearInput = element(by.id('year'));

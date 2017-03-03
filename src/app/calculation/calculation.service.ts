@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import {ChildAllowance} from "./childallowance";
+import {Calculation} from "./calculation";
 import {Http, RequestOptions, URLSearchParams} from "@angular/http";
 import {Observable} from "rxjs";
-import {ChildAllowances} from "./childallowances";
+import {Calculations} from "./calculations";
 import 'rxjs/add/operator/map';
 import {Allowance} from "./allowance";
 
 @Injectable()
-export class ChildAllowanceService {
+export class CalculationService {
 
   constructor(private http: Http) { }
 
-  getChildAllowance = (year, month) : Observable<ChildAllowances> => {
+  getCalculation = (year, month) : Observable<Calculations> => {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('year', year);
@@ -20,22 +20,22 @@ export class ChildAllowanceService {
     return this.http
       .get('api/calculation', {search : params})
       .map(httpResponse => {
-        let childAllowances = new ChildAllowances();
-        childAllowances.calculations = [];
+        let calculations = new Calculations();
+        calculations.calculations = [];
 
-        httpResponse.json().calculations.forEach( childAllowanceJson => {
+        httpResponse.json().calculations.forEach( calculationJson => {
           let allowances = [];
 
-          if (childAllowanceJson.allowances) {
-            childAllowanceJson.allowances.forEach(a => {
+          if (calculationJson.allowances) {
+            calculationJson.allowances.forEach(a => {
               allowances.push(new Allowance(a.type, a.value));
             });
           }
 
-          childAllowances.calculations.push(new ChildAllowance(childAllowanceJson.total, childAllowanceJson.inss, allowances));
+          calculations.calculations.push(new Calculation(calculationJson.total, calculationJson.inss, allowances));
         });
 
-        return childAllowances;
+        return calculations;
       });
   }
 
