@@ -2,6 +2,11 @@
   child-allowances!
 </p>
 
+<form>
+<input type="number" id="year" name="year" [(ngModel)]="year"/>
+<input type="number" id="month" name="month" [(ngModel)]="month"/>
+</form>
+
 <button (click)="calculate()" id="calculateButton">Calculate</button>
 
 <div *ngFor="let childAllowance of childAllowances?.calculations; let i = index">

@@ -7,11 +7,12 @@ import {ChildAllowanceService} from "./childallowance/child-allowance.service";
 import {Http, ConnectionBackend, RequestOptions, BaseRequestOptions} from "@angular/http";
 import {MockBackend} from "@angular/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
+import {FormsModule} from "@angular/forms";
 
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [FormsModule, RouterTestingModule],
       providers: [ChildAllowanceService],
       declarations: [
         AppComponent,

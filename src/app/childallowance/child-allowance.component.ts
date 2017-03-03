@@ -4,10 +4,12 @@ import {ChildAllowances} from "./childallowances";
 
 @Component({
   selector: 'app-child-allowance',
-  templateUrl: 'child-allowance.component.html',
-  styleUrls: ['child-allowance.component.css']
+  templateUrl: 'child-allowance.component.html'
 })
 export class ChildAllowanceComponent implements OnInit {
+
+  private year: number;
+  private month: number;
 
   childAllowances: ChildAllowances;
 
@@ -18,7 +20,7 @@ export class ChildAllowanceComponent implements OnInit {
 
   calculate = (): void => {
     this.childAllowanceService
-      .getChildAllowance()
+      .getChildAllowance(this.year, this.month)
       .subscribe(childAllowances => {
           this.childAllowances = childAllowances;
       });

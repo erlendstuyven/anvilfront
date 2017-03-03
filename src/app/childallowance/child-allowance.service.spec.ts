@@ -32,7 +32,7 @@ describe('ChildAllowanceService', () => {
       mockBackend.connections.subscribe((connection) => {
         let request = connection.request;
 
-        expect(request.url).toEqual('api/calculation');
+        expect(request.url).toEqual('api/calculation?year=2019&month=2');
         expect(request.method).toEqual(RequestMethod.Get);
 
         connection.mockRespond(new Response(new ResponseOptions({
@@ -42,7 +42,7 @@ describe('ChildAllowanceService', () => {
       });
 
       service
-        .getChildAllowance()
+        .getChildAllowance(2019, 2)
         .subscribe(actualCreateChildFileResponse => {
           expect(actualCreateChildFileResponse).toEqual(childAllowances);
           done();

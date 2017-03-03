@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {ChildAllowance} from "./childallowance";
-import {Http} from "@angular/http";
+import {Http, RequestOptions, URLSearchParams} from "@angular/http";
 import {Observable} from "rxjs";
 import {ChildAllowances} from "./childallowances";
 import 'rxjs/add/operator/map';
@@ -10,9 +10,14 @@ export class ChildAllowanceService {
 
   constructor(private http: Http) { }
 
-  getChildAllowance = () : Observable<ChildAllowances> => {
+  getChildAllowance = (year, month) : Observable<ChildAllowances> => {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('year', year);
+    params.set('month', month);
+
     return this.http
-      .get('api/calculation')
+      .get('api/calculation', {search : params})
       .map(httpResponse => {
         let childAllowances = new ChildAllowances();
         childAllowances.calculations = [];
