@@ -20,10 +20,11 @@ describe('File Form Page', function () {
 
   it('should be able to perform calculation for a given month', () => {
     let newVar = {
-      calculations: [{total: 160, inss: 1234}, {total: 100, inss: 1111}, {
-        total: 200,
-        inss: 2222
-      }, {total: 115, inss: 3333}]
+      calculations: [
+        {total: 160, inss: 1234, allowances: [{type: 'BASIC', value: 160}]},
+        {total: 100, inss: 1111, allowances: [{type: 'BASIC', value: 160}]},
+        {total: 200, inss: 2222, allowances: [{type: 'BASIC', value: 160}]},
+        {total: 115, inss: 3333, allowances: [{type: 'BASIC', value: 160}]}]
     };
 
     mockServerClient("localhost", 1080).mockAnyResponse(

@@ -6,6 +6,7 @@ import {Http, BaseRequestOptions, ConnectionBackend, RequestMethod, Response, Re
 import {MockBackend} from "@angular/http/testing";
 import {ChildAllowance} from "./childallowance";
 import {ChildAllowances} from "./childallowances";
+import {Allowance} from "./allowance";
 
 describe('ChildAllowanceService', () => {
   beforeEach(() => {
@@ -27,7 +28,7 @@ describe('ChildAllowanceService', () => {
   it('should perform a http get call to api/calculation and should return a list of ChildAllowances', (done) => {
     inject([MockBackend, ChildAllowanceService], (mockBackend: MockBackend, service: ChildAllowanceService) => {
       let childAllowances: ChildAllowances = new ChildAllowances();
-      childAllowances.calculations = [ new ChildAllowance("160.00", '1234'), new ChildAllowance("150.00", '1111') ];
+      childAllowances.calculations = [ new ChildAllowance("160.00", '1234', [new Allowance('BASIC', 160)]), new ChildAllowance("150.00", '1111', [new Allowance('BASIC', 160)]) ];
 
       mockBackend.connections.subscribe((connection) => {
         let request = connection.request;
