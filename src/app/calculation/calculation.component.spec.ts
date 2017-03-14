@@ -3,15 +3,20 @@ import { FormsModule } from '@angular/forms';
 import { CalculationComponent } from './calculation.component';
 import { CalculationService } from "./calculation.service";
 import { CalculationServiceMock } from "./calculation.service.mock";
-import { Calculations } from "./calculations";
 import { Calculation } from "./calculation";
+import {Allowance} from "./allowance";
+import {CalculationRequest} from "./calculation-request";
 
 describe('CalculationComponent', () => {
+
   let component;
   let fixture: ComponentFixture<CalculationComponent>;
 
-  let expectedCalculations = new Calculations();
-  expectedCalculations.calculations = [ new Calculation('160.00', '123', []), new Calculation('150.00', '345', []) ];
+
+  var allowance: Allowance = new Allowance('BASIC', 160);
+  let allowances: Allowance[] = [];
+  allowances.push(allowance);
+  var expectedCalculation: Calculation = new Calculation(allowances);
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -33,17 +38,35 @@ describe('CalculationComponent', () => {
     expect(component).toBeTruthy();
   }));
 
-  it('calculate should delegate to CalculationService', () => {
+  it('calculate should delegate to CalculationService with BasicAllowanceGranted unchecked', () => {
     inject([CalculationService], (calculationService: CalculationServiceMock) => {
       component.year = 2019;
       component.month = 2;
+      component.isBasicAllowanceGranted = false;
 
-      calculationService.calculations = expectedCalculations;
+      calculationService.calculation = expectedCalculation;
+
+      let expectedCalculationRequest : CalculationRequest = new CalculationRequest('2019-02', []);
 
       component.calculate();
 
-      expect(component.calculations).toEqual(expectedCalculations);
-      expect(calculationService.params).toEqual({year:2019,month:2});
+      expect(component.calculation).toEqual(expectedCalculation);
+      expect(calculationService.params).toEqual(expectedCalculationRequest);
+    })();
+  });
+
+  it('calculate should delegate to CalculationService when BasicAllowanceGranted is checked', () => {
+    inject([CalculationService], (calculationService: CalculationServiceMock) => {
+      component.year = 2019;
+      component.month = 2;
+      component.isBasicAllowanceGranted = true;
+
+      calculationService.calculation = expectedCalculation;
+
+      component.calculate();
+
+      expect(component.calculation).toEqual(expectedCalculation);
+      expect(calculationService.params).toEqual(new CalculationRequest('2019-02', ['BASIC']));
     })();
   });
 

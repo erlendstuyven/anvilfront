@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CalculationService} from "./calculation.service";
-import {Calculations} from "./calculations";
+import {CalculationRequest} from "./calculation-request";
+import {Calculation} from "./calculation";
 
 @Component({
   selector: 'app-child-allowance',
@@ -8,22 +9,40 @@ import {Calculations} from "./calculations";
 })
 export class CalculationComponent implements OnInit {
 
-  private year: number;
-  private month: number;
+  year: number;
+  month: number;
+  isBasicAllowanceGranted: boolean;
 
-  calculations: Calculations;
+  calculation: Calculation;
 
-  constructor(private calculationService: CalculationService) { }
+  constructor(private calculationService: CalculationService) {
+  }
 
   ngOnInit() {
   }
 
   calculate = (): void => {
+    let entitlements: string[] = [];
+
+    if (this.isBasicAllowanceGranted) {
+      entitlements.push('BASIC');
+    }
+
     this.calculationService
-      .getCalculation(this.year, this.month)
-      .subscribe(calculations => {
-          this.calculations = calculations;
+      .getCalculation(new CalculationRequest(this.pad(), entitlements))
+      .subscribe(calculation => {
+        this.calculation = calculation;
       });
   }
+
+  pad(): string {
+
+    if(this.month < 10) {
+      return this.year + "-0" + this.month;
+    } else {
+      return this.year + "-" + this.month;
+    }
+  }
+
 
 }

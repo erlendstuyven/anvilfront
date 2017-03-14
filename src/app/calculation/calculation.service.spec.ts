@@ -2,11 +2,14 @@
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { CalculationService } from './calculation.service';
-import {Http, BaseRequestOptions, ConnectionBackend, RequestMethod, Response, ResponseOptions} from "@angular/http";
+import {
+  Http, BaseRequestOptions, ConnectionBackend, RequestMethod, Response, ResponseOptions,
+  RequestOptions, Headers
+} from "@angular/http";
 import {MockBackend} from "@angular/http/testing";
 import {Calculation} from "./calculation";
-import {Calculations} from "./calculations";
 import {Allowance} from "./allowance";
+import {CalculationRequest} from "./calculation-request";
 
 describe('CalculationService', () => {
   beforeEach(() => {
@@ -25,27 +28,35 @@ describe('CalculationService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('should perform a http get call to api/calculation and should return a list of Calculations', (done) => {
+  it('should perform a http post call to api/calculation and should return a list of allowances', (done) => {
     inject([MockBackend, CalculationService], (mockBackend: MockBackend, service: CalculationService) => {
-      let calculations: Calculations = new Calculations();
-      calculations.calculations = [ new Calculation("160.00", '1234', [new Allowance('BASIC', 160)]), new Calculation("150.00", '1111', [new Allowance('BASIC', 160)]) ];
+
+      let entitlements: string[] = [];
+      entitlements.push('BASIC');
+
+      var allowance: Allowance = new Allowance('BASIC', 160);
+      let allowances: Allowance[] = [];
+      allowances.push(allowance);
+
+      let calculation: Calculation = new Calculation(allowances);
+      let calculationRequest: CalculationRequest = new CalculationRequest('2019-02', entitlements);
 
       mockBackend.connections.subscribe((connection) => {
         let request = connection.request;
 
-        expect(request.url).toEqual('api/calculation?year=2019&month=2');
-        expect(request.method).toEqual(RequestMethod.Get);
+        expect(request.url).toEqual('api/calculation');
+        expect(request.method).toEqual(RequestMethod.Post);
 
         connection.mockRespond(new Response(new ResponseOptions({
           status: 200,
-          body: JSON.stringify(calculations)
+          body: JSON.stringify(calculation),
         })));
       });
 
       service
-        .getCalculation(2019, 2)
-        .subscribe(actualCreateChildFileResponse => {
-          expect(actualCreateChildFileResponse).toEqual(calculations);
+        .getCalculation(calculationRequest)
+        .subscribe(actualCalculationResponse => {
+          expect(actualCalculationResponse).toEqual(calculation);
           done();
         });
     })();

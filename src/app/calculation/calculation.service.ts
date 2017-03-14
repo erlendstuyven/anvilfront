@@ -1,41 +1,33 @@
 import { Injectable } from '@angular/core';
 import {Calculation} from "./calculation";
-import {Http, RequestOptions, URLSearchParams} from "@angular/http";
+import {Http, Headers, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs";
-import {Calculations} from "./calculations";
 import 'rxjs/add/operator/map';
 import {Allowance} from "./allowance";
+import {CalculationRequest} from "./calculation-request";
 
 @Injectable()
 export class CalculationService {
 
+
+
   constructor(private http: Http) { }
 
-  getCalculation = (year, month) : Observable<Calculations> => {
+  getCalculation = (calculationRequest: CalculationRequest) : Observable<Calculation> => {
 
-    let params: URLSearchParams = new URLSearchParams();
-    params.set('year', year);
-    params.set('month', month);
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
 
     return this.http
-      .get('api/calculation', {search : params})
+      .post('api/calculation', JSON.stringify(calculationRequest), options)
       .map(httpResponse => {
-        let calculations = new Calculations();
-        calculations.calculations = [];
+        let allowances = [];
 
-        httpResponse.json().calculations.forEach( calculationJson => {
-          let allowances = [];
-
-          if (calculationJson.allowances) {
-            calculationJson.allowances.forEach(a => {
-              allowances.push(new Allowance(a.type, a.value));
-            });
-          }
-
-          calculations.calculations.push(new Calculation(calculationJson.total, calculationJson.inss, allowances));
+        httpResponse.json().allowances.forEach( a => {
+          allowances.push(new Allowance(a.type, a.value));
         });
 
-        return calculations;
+        return new Calculation(allowances);
       });
   }
 

@@ -1,15 +1,16 @@
 import {Observable} from "rxjs";
-import {Calculations} from "./calculations";
+import {Calculation} from "./calculation";
+import {CalculationRequest} from "./calculation-request";
 
 export class CalculationServiceMock {
 
   params: any;
 
-  calculations: Calculations;
+  calculation: Calculation;
 
-  getCalculation = (year, month) : Observable<Calculations> => {
-      this.params = {year : year, month : month};
-      return Observable.of(this.calculations);
+  getCalculation = (calculationRequest: CalculationRequest) : Observable<Calculation> => {
+      this.params = calculationRequest;
+      return Observable.of(this.calculation);
   }
 
 }
