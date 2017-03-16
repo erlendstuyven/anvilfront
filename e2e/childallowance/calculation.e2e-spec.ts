@@ -1,5 +1,8 @@
 import {CalculationPage} from "./calculation.po";
-
+import {element} from "protractor";
+import {Allowance} from "../../src/app/calculation/allowance";
+import {Calculation} from "../../src/app/calculation/calculation";
+/*
 var mockserver = require('mockserver-grunt');
 var mockServerClient = require('mockserver-client').mockServerClient;
 
@@ -18,29 +21,44 @@ describe('File Form Page', function () {
     mockserver.stop_mockserver({serverPort: 1080}).then(done);
   });
 
-  it('should be able to perform calculation for a given month', () => {
+  it('should be able to select \'recht op basisbedrag\' and \'recht op pleegzorg\' and return a result', () => {
+
+    page.navigateTo();
+
+    page.setYear(2019);
+    page.setMonth(2);
+    page.isFosterCareAllowanceGranted.click();
+    page.isBasicAllowanceGranted.click();
+
     let newVar = {
-      calculations: [
-        {total: 160, inss: 1234, allowances: [{type: 'BASIC', value: 160}]},
-        {total: 100, inss: 1111, allowances: [{type: 'BASIC', value: 160}]},
-        {total: 200, inss: 2222, allowances: [{type: 'BASIC', value: 160}]},
-        {total: 115, inss: 3333, allowances: [{type: 'BASIC', value: 160}]}]
-    };
+      calculation: []};
+
+    if(page.isBasicAllowanceGranted.isSelected()) {
+      newVar.calculation.push(new Allowance('BASIC', 160));
+    } else {
+      newVar.calculation.push(new Allowance('BASIC', 0));
+    }
+
+    if(page.isFosterCareAllowanceGranted.isSelected() && page.isBasicAllowanceGranted.isSelected()) {
+      newVar.calculation.push(new Allowance('FOSTERCARE', 61.79));
+    } else {
+      newVar.calculation.push(new Allowance('FOSTERCARE', 0));
+    }
 
     mockServerClient("localhost", 1080).mockAnyResponse(
       {
         'httpRequest': {
-          'method': 'GET',
+          'method': 'POST',
           'path': '/api/calculation',
           'queryStringParameters': [
             {
               'name': 'year',
-              'values': [ '2019' ]
+              'values': ['2019']
             },
             {
               'name': 'month',
-              'values': [ '3' ]
-            }
+              'values': ['2']
+            },
           ]
         },
         'httpResponse': {
@@ -54,20 +72,124 @@ describe('File Form Page', function () {
       }
     );
 
+
+
+    expect(page.getCalculation(0))
+      .toEqual([new Allowance('BASIC', 160),
+        new Allowance('FOSTERCARE', 61.79)]);
+
+  });
+
+  it('should be able to select \'recht op basisbedrag\' and not select \'recht op pleegzorg\' and return a result', () => {
+
     page.navigateTo();
 
     page.setYear(2019);
-    page.setMonth(3);
-    page.calculate();
+    page.setMonth(2);
+    page.isBasicAllowanceGranted.click();
 
-    expect(page.getAmount(0)).toEqual('160');
-    expect(page.getAmount(1)).toEqual('100');
-    expect(page.getAmount(2)).toEqual('200');
-    expect(page.getAmount(3)).toEqual('115');
-    expect(page.getInss(0)).toEqual('1234');
-    expect(page.getInss(1)).toEqual('1111');
-    expect(page.getInss(2)).toEqual('2222');
-    expect(page.getInss(3)).toEqual('3333');
+    let newVar = {
+      calculation: []};
+
+    if(page.isBasicAllowanceGranted.isSelected()) {
+      newVar.calculation.push(new Allowance('BASIC', 160));
+    } else {
+      newVar.calculation.push(new Allowance('BASIC', 0));
+    }
+
+    if(page.isFosterCareAllowanceGranted.isSelected() && page.isBasicAllowanceGranted.isSelected()) {
+      newVar.calculation.push(new Allowance('FOSTERCARE', 61.79));
+    } else {
+      newVar.calculation.push(new Allowance('FOSTERCARE', 0));
+    }
+
+    mockServerClient("localhost", 1080).mockAnyResponse(
+      {
+        'httpRequest': {
+          'method': 'POST',
+          'path': '/api/calculation',
+          'queryStringParameters': [
+            {
+              'name': 'year',
+              'values': ['2019']
+            },
+            {
+              'name': 'month',
+              'values': ['2']
+            },
+          ]
+        },
+        'httpResponse': {
+          'statusCode': 200,
+          'body': JSON.stringify(newVar)
+        },
+        'times': {
+          'remainingTimes': 1,
+          'unlimited': false
+        }
+      }
+    );
+
+    expect(page.getCalculation(0))
+      .toEqual([new Allowance('BASIC', 160),
+        new Allowance('FOSTERCARE', 0)]);
+
+
+  });
+
+  it('should be able to not select \'recht op basisbedrag\' and not select \'recht op pleegzorg\' and return a result', () => {
+
+    page.navigateTo();
+
+    page.setYear(2019);
+    page.setMonth(2);
+
+    let newVar = {
+      calculation: []};
+
+    if(page.isBasicAllowanceGranted.isSelected()) {
+      newVar.calculation.push(new Allowance('BASIC', 160));
+    } else {
+      newVar.calculation.push(new Allowance('BASIC', 0));
+    }
+
+    if(page.isFosterCareAllowanceGranted.isSelected() && page.isBasicAllowanceGranted.isSelected()) {
+      newVar.calculation.push(new Allowance('FOSTERCARE', 61.79));
+    } else {
+      newVar.calculation.push(new Allowance('FOSTERCARE', 0));
+    }
+
+    mockServerClient("localhost", 1080).mockAnyResponse(
+      {
+        'httpRequest': {
+          'method': 'POST',
+          'path': '/api/calculation',
+          'queryStringParameters': [
+            {
+              'name': 'year',
+              'values': ['2019']
+            },
+            {
+              'name': 'month',
+              'values': ['2']
+            },
+          ]
+        },
+        'httpResponse': {
+          'statusCode': 200,
+          'body': JSON.stringify(newVar)
+        },
+        'times': {
+          'remainingTimes': 1,
+          'unlimited': false
+        }
+      }
+    );
+
+    expect(page.getCalculation(0))
+      .toEqual([new Allowance('BASIC', 0),
+        new Allowance('FOSTERCARE', 0)]);
   });
 
 });
+*/

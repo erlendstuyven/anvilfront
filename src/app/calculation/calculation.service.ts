@@ -23,6 +23,7 @@ export class CalculationService {
       .map(httpResponse => {
         let allowances = [];
 
+        console.log(httpResponse.json());
         httpResponse.json().allowances.forEach( a => {
           allowances.push(new Allowance(a.type, a.value));
         });

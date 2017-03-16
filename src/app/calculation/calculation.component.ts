@@ -12,6 +12,7 @@ export class CalculationComponent implements OnInit {
   year: number;
   month: number;
   isBasicAllowanceGranted: boolean;
+  isFosterCareAllowanceGranted: boolean;
 
   calculation: Calculation;
 
@@ -26,6 +27,10 @@ export class CalculationComponent implements OnInit {
 
     if (this.isBasicAllowanceGranted) {
       entitlements.push('BASIC');
+    }
+
+    if (this.isFosterCareAllowanceGranted) {
+      entitlements.push('FOSTERCARE');
     }
 
     this.calculationService

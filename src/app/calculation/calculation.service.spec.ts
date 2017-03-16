@@ -33,10 +33,13 @@ describe('CalculationService', () => {
 
       let entitlements: string[] = [];
       entitlements.push('BASIC');
+      entitlements.push('FOSTERCARE');
 
-      var allowance: Allowance = new Allowance('BASIC', 160);
+      var allowanceBasic: Allowance = new Allowance('BASIC', 160);
+      var allowanceFosterCare: Allowance = new Allowance('FOSTERCARE', 61.79);
       let allowances: Allowance[] = [];
-      allowances.push(allowance);
+      allowances.push(allowanceBasic);
+      allowances.push(allowanceFosterCare);
 
       let calculation: Calculation = new Calculation(allowances);
       let calculationRequest: CalculationRequest = new CalculationRequest('2019-02', entitlements);

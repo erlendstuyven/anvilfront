@@ -1,10 +1,14 @@
-import {browser, element, by} from 'protractor';
+import {browser, element, by, ElementFinder} from 'protractor';
+import {Calculation} from "../../src/app/calculation/calculation";
+import {Allowance} from "../../src/app/calculation/allowance";
 
 export class CalculationPage {
 
   private calculateButton = element(by.id('calculateButton'));
   private yearInput = element(by.id('year'));
   private monthInput = element(by.id('month'));
+  private _isBasicAllowanceGranted = element(by.id('_isBasicAllowanceGranted'));
+  private _isFosterCareAllowanceGranted = element(by.id('_isFosterCareAllowanceGranted'));
 
   navigateTo() {
     return browser.get('/');
@@ -22,12 +26,15 @@ export class CalculationPage {
     this.calculateButton.click();
   };
 
-  getAmount(index) {
-    return element(by.id('total' + index)).getText();
+  getCalculation(index) {
+    return element(by.id('calculation?.allowances' + index)).getText();
   }
 
-  getInss(index) {
-    return element(by.id('inss' + index)).getText();
+  get isFosterCareAllowanceGranted(): ElementFinder {
+    return this._isFosterCareAllowanceGranted;
+  }
+  get isBasicAllowanceGranted(): ElementFinder {
+    return this._isBasicAllowanceGranted;
   }
 
 }
