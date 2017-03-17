@@ -6,6 +6,7 @@ import { CalculationServiceMock } from "./calculation.service.mock";
 import { Calculation } from "./calculation";
 import {Allowance} from "./allowance";
 import {CalculationRequest} from "./calculation-request";
+import {Entitlement} from "./entitlement";
 
 describe('CalculationComponent', () => {
 
@@ -68,7 +69,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest('2019-02', ['BASIC']));
+      expect(calculationService.params).toEqual(new CalculationRequest('2019-02', [new Entitlement('BASIC')]));
     })();
   });
 
@@ -84,7 +85,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest('2019-02', ['BASIC', 'FOSTERCARE']));
+      expect(calculationService.params).toEqual(new CalculationRequest('2019-02', [new Entitlement('BASIC'), new Entitlement('FOSTERCARE')]));
     })();
   });
 
@@ -100,7 +101,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest('2019-02', ['FOSTERCARE']));
+      expect(calculationService.params).toEqual(new CalculationRequest('2019-02', [new Entitlement('FOSTERCARE')]));
     })();
   });
 
@@ -116,7 +117,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest('2019-02', ['BASIC']));
+      expect(calculationService.params).toEqual(new CalculationRequest('2019-02', [new Entitlement('BASIC')]));
     })();
   });
 

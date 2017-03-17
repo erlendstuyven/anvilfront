@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CalculationService} from "./calculation.service";
 import {CalculationRequest} from "./calculation-request";
 import {Calculation} from "./calculation";
+import {Entitlement} from "./entitlement";
 
 @Component({
   selector: 'app-child-allowance',
@@ -23,14 +24,14 @@ export class CalculationComponent implements OnInit {
   }
 
   calculate = (): void => {
-    let entitlements: string[] = [];
+    let entitlements: Entitlement[] = [];
 
     if (this.isBasicAllowanceGranted) {
-      entitlements.push('BASIC');
+      entitlements.push(new Entitlement('BASIC'));
     }
 
     if (this.isFosterCareAllowanceGranted) {
-      entitlements.push('FOSTERCARE');
+      entitlements.push(new Entitlement('FOSTERCARE'));
     }
 
     this.calculationService

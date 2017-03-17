@@ -56,7 +56,7 @@
               </tr>
               <tr *ngFor="let allowance of calculation?.allowances; let j = index">
                 <td>{{allowance.type}}</td>
-                <td align="right">&euro;{{allowance.value}}</td>
+                <td align="right">&euro; <span id="allowance_{{allowance.type}}_value">{{allowance.value}}</span></td>
               </tr>
             </table>
 

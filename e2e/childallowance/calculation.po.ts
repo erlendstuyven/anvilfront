@@ -7,8 +7,8 @@ export class CalculationPage {
   private calculateButton = element(by.id('calculateButton'));
   private yearInput = element(by.id('year'));
   private monthInput = element(by.id('month'));
-  private _isBasicAllowanceGranted = element(by.id('_isBasicAllowanceGranted'));
-  private _isFosterCareAllowanceGranted = element(by.id('_isFosterCareAllowanceGranted'));
+  private _isBasicAllowanceGranted = element(by.id('isBasicAllowanceGranted'));
+  private _isFosterCareAllowanceGranted = element(by.id('isFosterCareAllowanceGranted'));
 
   navigateTo() {
     return browser.get('/');
@@ -28,6 +28,10 @@ export class CalculationPage {
 
   getCalculation(index) {
     return element(by.id('calculation?.allowances' + index)).getText();
+  }
+
+  getAllowanceValue(type) {
+    return element(by.id('allowance_' + type + '_value')).getText();
   }
 
   get isFosterCareAllowanceGranted(): ElementFinder {
