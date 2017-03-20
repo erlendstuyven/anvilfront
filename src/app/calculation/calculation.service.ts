@@ -23,12 +23,13 @@ export class CalculationService {
       .map(httpResponse => {
         let allowances = [];
 
-        console.log(httpResponse.json());
-        httpResponse.json().allowances.forEach( a => {
+        let data = httpResponse.json();
+
+        data.allowances.forEach(a => {
           allowances.push(new Allowance(a.type, a.value));
         });
 
-        return new Calculation(allowances);
+        return new Calculation(data.year, data.month, data.timestamp, allowances);
       });
   }
 

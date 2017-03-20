@@ -35,20 +35,10 @@ export class CalculationComponent implements OnInit {
     }
 
     this.calculationService
-      .getCalculation(new CalculationRequest(this.pad(), entitlements))
+      .getCalculation(new CalculationRequest(this.year, this.month, entitlements))
       .subscribe(calculation => {
         this.calculation = calculation;
       });
-  }
-
-  pad(): string {
-
-    if(this.month < 10) {
-      return this.year + "-0" + this.month;
-    } else {
-      return this.year + "-" + this.month;
-    }
-  }
-
+  };
 
 }

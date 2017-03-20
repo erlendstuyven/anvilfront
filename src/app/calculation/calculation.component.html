@@ -22,8 +22,8 @@
   </div>
 
   <div class="form-group">
-    <label class="col-sm-2">Recht op basisbedrag</label>
-    <div class="col-sm-10">
+    <label class="col-sm-3">Recht op basisbedrag</label>
+    <div class="col-sm-9">
       <div class="form-check">
         <input type="checkbox" class="form-check-input" id="isBasicAllowanceGranted" name="isBasicAllowanceGranted" [(ngModel)]="isBasicAllowanceGranted" />
       </div>
@@ -31,8 +31,8 @@
   </div>
 
   <div class="form-group">
-    <label class="col-sm-2">Recht op pleegzorg</label>
-    <div class="col-sm-10">
+    <label class="col-sm-3">Recht op pleegzorg</label>
+    <div class="col-sm-9">
       <div class="form-check">
         <input type="checkbox" class="form-check-input" id="isFosterCareAllowanceGranted" name="isFosterCareAllowanceGranted" [(ngModel)]="isFosterCareAllowanceGranted" />
       </div>
@@ -48,16 +48,22 @@
 
 
 <div *ngIf="calculation" class="row" style="padding-top: 50px">
-
-            <table *ngIf="calculation?.allowances" class="panel-body table table-condensed table-hover">
-              <tr>
-                <td><b>toeslag</b></td>
-                <td align="right"><b>bedrag</b></td>
-              </tr>
-              <tr *ngFor="let allowance of calculation?.allowances; let j = index">
-                <td>{{allowance.type}}</td>
-                <td align="right">&euro; <span id="allowance_{{allowance.type}}_value">{{allowance.value}}</span></td>
-              </tr>
-            </table>
-
+  <div class="col-sm-12">
+    <table *ngIf="calculation?.allowances" class="panel-body table table-condensed table-hover">
+      <tr>
+        <td><b>maand</b></td>
+        <td><b>jaar</b></td>
+        <td><b>type</b></td>
+        <td><b>bedrag</b></td>
+        <td><b>datum berekening</b></td>
+      </tr>
+      <tr *ngFor="let allowance of calculation?.allowances; let j = index">
+        <td>{{calculation.month}}</td>
+        <td>{{calculation.year}}</td>
+        <td>{{allowance.type}}</td>
+        <td>&euro; <span id="allowance_{{allowance.type}}_value">{{allowance.value}}</span></td>
+        <td>{{calculation.timestamp}}</td>
+      </tr>
+    </table>
+  </div>
 </div>

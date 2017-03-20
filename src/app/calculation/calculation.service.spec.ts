@@ -10,6 +10,7 @@ import {MockBackend} from "@angular/http/testing";
 import {Calculation} from "./calculation";
 import {Allowance} from "./allowance";
 import {CalculationRequest} from "./calculation-request";
+import {Entitlement} from "./entitlement";
 
 describe('CalculationService', () => {
   beforeEach(() => {
@@ -31,9 +32,9 @@ describe('CalculationService', () => {
   it('should perform a http post call to api/calculation and should return a list of allowances', (done) => {
     inject([MockBackend, CalculationService], (mockBackend: MockBackend, service: CalculationService) => {
 
-      let entitlements: string[] = [];
-      entitlements.push('BASIC');
-      entitlements.push('FOSTERCARE');
+      let entitlements: Entitlement[] = [];
+      entitlements.push(new Entitlement('BASIC'));
+      entitlements.push(new Entitlement('FOSTERCARE'));
 
       var allowanceBasic: Allowance = new Allowance('BASIC', 160);
       var allowanceFosterCare: Allowance = new Allowance('FOSTERCARE', 61.79);
@@ -41,8 +42,8 @@ describe('CalculationService', () => {
       allowances.push(allowanceBasic);
       allowances.push(allowanceFosterCare);
 
-      let calculation: Calculation = new Calculation(allowances);
-      let calculationRequest: CalculationRequest = new CalculationRequest('2019-02', entitlements);
+      let calculation: Calculation = new Calculation(2, 2019, 'timestamp', allowances);
+      let calculationRequest: CalculationRequest = new CalculationRequest(2019, 2, entitlements);
 
       mockBackend.connections.subscribe((connection) => {
         let request = connection.request;

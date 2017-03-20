@@ -3,7 +3,7 @@ import {Allowance} from "./allowance";
 export class Calculation {
 
 
-  constructor(public allowances: Allowance[]) {
+  constructor(public year: number, public month: number, public timestamp: string, public allowances: Allowance[]) {
   }
 
 }

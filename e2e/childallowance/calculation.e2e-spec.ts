@@ -32,12 +32,13 @@ describe('File Form Page', function () {
     };
 
     let request = {
-      month : '2019-02',
+      year: 2019,
+      month : 2,
       entitlements : [
         new Entitlement('BASIC'),
         new Entitlement('FOSTERCARE')
       ]
-    }
+    };
 
     mockServerClient("localhost", 1080).mockAnyResponse(
       {

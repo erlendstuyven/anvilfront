@@ -19,7 +19,7 @@ describe('CalculationComponent', () => {
   let allowances: Allowance[] = [];
   allowances.push(allowanceBasic);
   allowances.push(allowanceFosterCare);
-  var expectedCalculation: Calculation = new Calculation(allowances);
+  var expectedCalculation: Calculation = new Calculation(2019, 2, 'timestamp', allowances);
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -49,7 +49,7 @@ describe('CalculationComponent', () => {
 
       calculationService.calculation = expectedCalculation;
 
-      let expectedCalculationRequest : CalculationRequest = new CalculationRequest('2019-02', []);
+      let expectedCalculationRequest : CalculationRequest = new CalculationRequest(2019, 2, []);
 
       component.calculate();
 
@@ -69,7 +69,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest('2019-02', [new Entitlement('BASIC')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC')]));
     })();
   });
 
@@ -85,7 +85,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest('2019-02', [new Entitlement('BASIC'), new Entitlement('FOSTERCARE')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC'), new Entitlement('FOSTERCARE')]));
     })();
   });
 
@@ -101,7 +101,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest('2019-02', [new Entitlement('FOSTERCARE')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('FOSTERCARE')]));
     })();
   });
 
@@ -117,7 +117,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest('2019-02', [new Entitlement('BASIC')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC')]));
     })();
   });
 
