@@ -7,6 +7,8 @@ import { Calculation } from "./calculation";
 import {Allowance} from "./allowance";
 import {CalculationRequest} from "./calculation-request";
 import {Entitlement} from "./entitlement";
+import {Category} from "./category";
+import {All} from "tslint/lib/rules/completedDocsRule";
 
 describe('CalculationComponent', () => {
 
@@ -14,12 +16,16 @@ describe('CalculationComponent', () => {
   let fixture: ComponentFixture<CalculationComponent>;
 
 
-  var allowanceBasic: Allowance = new Allowance('BASIC', 160);
-  var allowanceFosterCare: Allowance = new Allowance('FOSTERCARE', 61.79);
+  var allowanceBasic: Allowance = new Allowance('BASIC', 160, new Category('cat1', 'basic'));
+  var allowanceFosterCare: Allowance = new Allowance('FOSTERCARE', 61.79, new Category('cat1', 'pleeg'));
+  var allowanceOrphanCare: Allowance = new Allowance('ORPHANCARE', 80, new Category('cat1', 'Halve wees'));
+  var allowanceSocialCare: Allowance = new Allowance('SOCIAL', 80, new Category('cat1', 'sociaal'));
   let allowances: Allowance[] = [];
   allowances.push(allowanceBasic);
   allowances.push(allowanceFosterCare);
-  var expectedCalculation: Calculation = new Calculation(2019, 2, 'timestamp', allowances);
+  allowances.push(allowanceOrphanCare);
+  allowances.push(allowanceSocialCare);
+  var expectedCalculation: Calculation = new Calculation(2019, 2, 'timestamp', allowances, 301.79);
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -69,7 +75,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1')]));
     })();
   });
 
@@ -85,7 +91,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC'), new Entitlement('FOSTERCARE')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1'), new Entitlement('FOSTERCARE', 'cat1')]));
     })();
   });
 
@@ -101,7 +107,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('FOSTERCARE')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('FOSTERCARE', 'cat1')]));
     })();
   });
 
@@ -117,7 +123,45 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1')]));
+    })();
+  });
+
+  it('calculate should delegate to CalculationService when BasicAllowanceGranted is checked and Orphancare half wees is checked', () => {
+    inject([CalculationService], (calculationService: CalculationServiceMock) => {
+      component.year = 2019;
+      component.month = 2;
+      component.isBasicAllowanceGranted = true;
+      component.isFosterCareAllowanceGranted = false;
+      component.isOrphanCareAllowanceGranted = 'cat1';
+
+      allowances.push(new Allowance('ORPHANCARE', 80, new Category('cat1', 'halve wees')));
+
+      calculationService.calculation = expectedCalculation;
+
+      component.calculate();
+
+      expect(component.calculation).toEqual(expectedCalculation);
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1'), new Entitlement('ORPHANCARE', 'cat1')]));
+    })();
+  });
+
+  it('calculate should delegate to CalculationService when BasicAllowanceGranted is checked and Social sociaal is checked', () => {
+    inject([CalculationService], (calculationService: CalculationServiceMock) => {
+      component.year = 2019;
+      component.month = 2;
+      component.isBasicAllowanceGranted = true;
+      component.isFosterCareAllowanceGranted = false;
+      component.isSocialAllowanceGranted = 'cat1';
+
+      allowances.push(new Allowance('SOCIAL', 50, new Category('cat1', 'sociaal')));
+
+      calculationService.calculation = expectedCalculation;
+
+      component.calculate();
+
+      expect(component.calculation).toEqual(expectedCalculation);
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1'), new Entitlement('SOCIAL', 'cat1')]));
     })();
   });
 

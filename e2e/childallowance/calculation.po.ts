@@ -1,7 +1,4 @@
 import {browser, element, by, ElementFinder} from 'protractor';
-import {Calculation} from "../../src/app/calculation/calculation";
-import {Allowance} from "../../src/app/calculation/allowance";
-
 export class CalculationPage {
 
   private calculateButton = element(by.id('calculateButton'));
@@ -9,6 +6,9 @@ export class CalculationPage {
   private monthInput = element(by.id('month'));
   private _isBasicAllowanceGranted = element(by.id('isBasicAllowanceGranted'));
   private _isFosterCareAllowanceGranted = element(by.id('isFosterCareAllowanceGranted'));
+  private _isOrphanCareAllowanceGranted = element(by.id('isOrphanCareAllowanceGranted'));
+  private _isSocialAllowanceGranted = element(by.id('isSocialAllowanceGranted'));
+  private _total = element(by.id('total'));
 
   navigateTo() {
     return browser.get('/');
@@ -40,5 +40,18 @@ export class CalculationPage {
   get isBasicAllowanceGranted(): ElementFinder {
     return this._isBasicAllowanceGranted;
   }
+
+  isOrphanCareAllowanceGranted(category: string) {
+    return this._isOrphanCareAllowanceGranted.sendKeys(category);
+  }
+
+  isSocialAllowanceGranted(category: string) {
+    return this._isSocialAllowanceGranted.sendKeys(category);
+  }
+
+  getTotal(type)  {
+    return element(by.id('calculation.' + type)).getText();
+  }
+
 
 }

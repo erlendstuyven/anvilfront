@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {CalculationService} from "./calculation.service";
-import {CalculationRequest} from "./calculation-request";
-import {Calculation} from "./calculation";
-import {Entitlement} from "./entitlement";
+import {CalculationService} from './calculation.service';
+import {CalculationRequest} from './calculation-request';
+import {Calculation} from './calculation';
+import {Entitlement} from './entitlement';
+import {element, by} from "protractor";
 
 @Component({
   selector: 'app-child-allowance',
@@ -14,6 +15,8 @@ export class CalculationComponent implements OnInit {
   month: number;
   isBasicAllowanceGranted: boolean;
   isFosterCareAllowanceGranted: boolean;
+  isOrphanCareAllowanceGranted: string = "";
+  isSocialAllowanceGranted: string = "";
 
   calculation: Calculation;
 
@@ -27,11 +30,20 @@ export class CalculationComponent implements OnInit {
     let entitlements: Entitlement[] = [];
 
     if (this.isBasicAllowanceGranted) {
-      entitlements.push(new Entitlement('BASIC'));
+      entitlements.push(new Entitlement('BASIC', 'cat1'));
     }
 
     if (this.isFosterCareAllowanceGranted) {
-      entitlements.push(new Entitlement('FOSTERCARE'));
+      entitlements.push(new Entitlement('FOSTERCARE', 'cat1'));
+    }
+
+
+    if (this.isOrphanCareAllowanceGranted.length > 0) {
+      entitlements.push(new Entitlement('ORPHANCARE', this.isOrphanCareAllowanceGranted));
+    }
+
+    if (this.isSocialAllowanceGranted.length > 0) {
+      entitlements.push(new Entitlement('SOCIAL', this.isSocialAllowanceGranted));
     }
 
     this.calculationService
@@ -40,5 +52,6 @@ export class CalculationComponent implements OnInit {
         this.calculation = calculation;
       });
   };
-
 }
+
+

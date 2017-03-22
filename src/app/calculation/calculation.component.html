@@ -4,7 +4,6 @@
   </div>
 </div>
 
-
 <form class="form-horizontal">
   <div class="form-group" style="margin-left: 0px">
     <div class="col-sm-3">
@@ -38,6 +37,36 @@
       </div>
     </div>
   </div>
+
+  <div class="form-group">
+    <label class="col-sm-3">Recht op wezentoeslag</label>
+    <div class="col-sm-3">
+      <div class="form-group row" style="margin-left: 0px">
+        <select [(ngModel)]="isOrphanCareAllowanceGranted" class="form-control" id="isOrphanCareAllowanceGranted" name="isOrphanCareAllowanceGranted">
+          <option></option>
+          <option value='cat1'>Halve wees</option>
+          <option value='cat2'>Volle wees</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group" >
+    <label class="col-sm-3">Recht op sociaaltoeslag</label>
+    <div class="col-sm-3">
+      <div class="form-group row" style="margin-left: 0px">
+        <select [(ngModel)]="isSocialAllowanceGranted" class="form-control" id="isSocialAllowanceGranted" name="isSocialAllowanceGranted">
+          <option></option>
+          <option value='cat1'>Sociaal</option>
+          <option value='cat2'>Sociaal</option>
+          <option value='cat3'>Sociaal</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+
+
 </form>
 
 <div class="row">
@@ -56,6 +85,7 @@
         <td><b>type</b></td>
         <td><b>bedrag</b></td>
         <td><b>datum berekening</b></td>
+        <td><b>categorie</b></td>
       </tr>
       <tr *ngFor="let allowance of calculation?.allowances; let j = index">
         <td>{{calculation.month}}</td>
@@ -63,6 +93,16 @@
         <td>{{allowance.type}}</td>
         <td>&euro; <span id="allowance_{{allowance.type}}_value">{{allowance.value}}</span></td>
         <td>{{calculation.timestamp}}</td>
+        <td *ngIf="allowance.category">{{allowance.category.description}}</td>
+        <td *ngIf="!allowance.category"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>TOTAL</td>
+        <td id="total">&euro;{{calculation.total}}</td>
+        <td></td>
+        <td></td>
       </tr>
     </table>
   </div>

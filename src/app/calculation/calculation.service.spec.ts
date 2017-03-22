@@ -11,6 +11,7 @@ import {Calculation} from "./calculation";
 import {Allowance} from "./allowance";
 import {CalculationRequest} from "./calculation-request";
 import {Entitlement} from "./entitlement";
+import {Category} from "./category";
 
 describe('CalculationService', () => {
   beforeEach(() => {
@@ -33,16 +34,19 @@ describe('CalculationService', () => {
     inject([MockBackend, CalculationService], (mockBackend: MockBackend, service: CalculationService) => {
 
       let entitlements: Entitlement[] = [];
-      entitlements.push(new Entitlement('BASIC'));
-      entitlements.push(new Entitlement('FOSTERCARE'));
+      entitlements.push(new Entitlement('BASIC', 'cat1'));
+      entitlements.push(new Entitlement('FOSTERCARE', 'cat1'));
+      entitlements.push(new Entitlement('ORPHANCARE', 'cat1'));
 
-      var allowanceBasic: Allowance = new Allowance('BASIC', 160);
-      var allowanceFosterCare: Allowance = new Allowance('FOSTERCARE', 61.79);
+      var allowanceBasic: Allowance = new Allowance('BASIC', 160, new Category('cat1', 'basic'));
+      var allowanceFosterCare: Allowance = new Allowance('FOSTERCARE', 61.79, new Category('cat1', 'pleeg'));
+      var allowanceOrphanCare: Allowance = new Allowance('ORPHANCARE', 80, new Category('cat1', 'halve wees'));
       let allowances: Allowance[] = [];
       allowances.push(allowanceBasic);
       allowances.push(allowanceFosterCare);
+      allowances.push(allowanceOrphanCare);
 
-      let calculation: Calculation = new Calculation(2, 2019, 'timestamp', allowances);
+      let calculation: Calculation = new Calculation(2, 2019, 'timestamp', allowances, 301.79);
       let calculationRequest: CalculationRequest = new CalculationRequest(2019, 2, entitlements);
 
       mockBackend.connections.subscribe((connection) => {

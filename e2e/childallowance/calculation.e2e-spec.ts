@@ -3,6 +3,7 @@ import {element} from "protractor";
 import {Allowance} from "../../src/app/calculation/allowance";
 import {Calculation} from "../../src/app/calculation/calculation";
 import {Entitlement} from "../../src/app/calculation/entitlement";
+import {Category} from "../../src/app/calculation/category";
 
 var mockserver = require('mockserver-grunt');
 var mockServerClient = require('mockserver-client').mockServerClient;
@@ -26,8 +27,10 @@ describe('File Form Page', function () {
 
     let newVar = {
       allowances: [
-        new Allowance('BASIC', 160),
-        new Allowance('FOSTERCARE', 61.79)
+        new Allowance('BASIC', 160, new Category('cat1', 'basic')),
+        new Allowance('FOSTERCARE', 61.79, new Category('cat1', 'pleeg')),
+        new Allowance('ORPHANCARE', 80, new Category('cat1', 'Halve wees')),
+        new Allowance('SOCIAL', 50, new Category('cat1', 'sociaal'))
       ]
     };
 
@@ -35,8 +38,10 @@ describe('File Form Page', function () {
       year: 2019,
       month : 2,
       entitlements : [
-        new Entitlement('BASIC'),
-        new Entitlement('FOSTERCARE')
+        new Entitlement('BASIC', 'cat1'),
+        new Entitlement('FOSTERCARE', 'cat1'),
+        new Entitlement('ORPHANCARE', 'cat1'),
+        new Entitlement('SOCIAL', 'cat1')
       ]
     };
 
@@ -64,10 +69,14 @@ describe('File Form Page', function () {
     page.setMonth(2);
     page.isFosterCareAllowanceGranted.click();
     page.isBasicAllowanceGranted.click();
+    page.isOrphanCareAllowanceGranted('halve wees');
+    page.isSocialAllowanceGranted('sociaal');
     page.calculate();
 
     expect(page.getAllowanceValue('BASIC')).toEqual('160');
     expect(page.getAllowanceValue('FOSTERCARE')).toEqual('61.79');
+    expect(page.getAllowanceValue('ORPHANCARE')).toEqual('80');
+    expect(page.getAllowanceValue('SOCIAL')).toEqual('50');
   });
 
 });
