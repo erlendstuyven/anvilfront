@@ -6,6 +6,8 @@ var express = require('express'),
 var app = express();
 var staticRoot = __dirname + '/../dist/';
 
+var backendServer = (process.env.BACKEND_SERVER || 'localhost:1080')
+
 app.set('port', (process.env.PORT || 4200));
 
 app.use(express.static(staticRoot));
@@ -28,7 +30,7 @@ app.use(function (req, res, next) {
 
 });
 
-app.use('/api', proxy('localhost:1080', {
+app.use('/api', proxy(backendServer, {
   forwardPath: function (req, res) {
     return '/api' + require('url').parse(req.url).path;
   }
