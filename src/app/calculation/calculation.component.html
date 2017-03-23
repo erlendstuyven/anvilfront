@@ -44,8 +44,8 @@
       <div class="form-group row" style="margin-left: 0px">
         <select [(ngModel)]="isOrphanCareAllowanceGranted" class="form-control" id="isOrphanCareAllowanceGranted" name="isOrphanCareAllowanceGranted">
           <option></option>
-          <option value='cat1'>Halve wees</option>
-          <option value='cat2'>Volle wees</option>
+          <option value='cat1'>wezentoeslag 50%</option>
+          <option value='cat2'>wezentoeslag 100%</option>
         </select>
       </div>
     </div>
@@ -57,9 +57,24 @@
       <div class="form-group row" style="margin-left: 0px">
         <select [(ngModel)]="isSocialAllowanceGranted" class="form-control" id="isSocialAllowanceGranted" name="isSocialAllowanceGranted">
           <option></option>
-          <option value='cat1'>Sociaal</option>
-          <option value='cat2'>Sociaal</option>
-          <option value='cat3'>Sociaal</option>
+          <option value='cat1'>sociale toeslag, laag inkomen, max 2 kids</option>
+          <option value='cat2'>sociale toeslag, laag inkomen, meer dan 2 kids</option>
+          <option value='cat3'>sociale toeslag, gemiddeld inkomen, meer dan 2 kids</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group" >
+    <label class="col-sm-3">Recht op universele participatie toeslag</label>
+    <div class="col-sm-3">
+      <div class="form-group row" style="margin-left: 0px">
+        <select [(ngModel)]="isUniversalParticipationGranted" class="form-control" id="isUniversalParticipationGranted" name="isUniversalParticipationGranted">
+          <option></option>
+          <option value='cat1'>universele participatie 0_2</option>
+          <option value='cat2'>universele participatie 5_11</option>
+          <option value='cat3'>universele participatie 12_17</option>
+          <option value='cat3'>universele participatie 18_24</option>
         </select>
       </div>
     </div>
@@ -100,7 +115,7 @@
         <td></td>
         <td></td>
         <td>TOTAL</td>
-        <td id="total">&euro;{{calculation.total}}</td>
+        <td id="total">&euro; {{calculation.total}}</td>
         <td></td>
         <td></td>
       </tr>

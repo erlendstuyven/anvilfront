@@ -17,6 +17,7 @@ export class CalculationComponent implements OnInit {
   isFosterCareAllowanceGranted: boolean;
   isOrphanCareAllowanceGranted: string = "";
   isSocialAllowanceGranted: string = "";
+  isUniversalParticipationGranted: string = "";
 
   calculation: Calculation;
 
@@ -34,17 +35,22 @@ export class CalculationComponent implements OnInit {
     }
 
     if (this.isFosterCareAllowanceGranted) {
-      entitlements.push(new Entitlement('FOSTERCARE', 'cat1'));
+      entitlements.push(new Entitlement('CARE_FOSTER', 'cat1'));
     }
 
 
     if (this.isOrphanCareAllowanceGranted.length > 0) {
-      entitlements.push(new Entitlement('ORPHANCARE', this.isOrphanCareAllowanceGranted));
+      entitlements.push(new Entitlement('CARE_ORPHAN', this.isOrphanCareAllowanceGranted));
     }
 
     if (this.isSocialAllowanceGranted.length > 0) {
       entitlements.push(new Entitlement('SOCIAL', this.isSocialAllowanceGranted));
     }
+
+    if (this.isUniversalParticipationGranted.length > 0) {
+      entitlements.push(new Entitlement('PARTICIPATION_UNIVERSAL', this.isUniversalParticipationGranted));
+    }
+
 
     this.calculationService
       .getCalculation(new CalculationRequest(this.year, this.month, entitlements))

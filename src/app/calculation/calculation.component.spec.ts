@@ -17,14 +17,16 @@ describe('CalculationComponent', () => {
 
 
   var allowanceBasic: Allowance = new Allowance('BASIC', 160, new Category('cat1', 'basic'));
-  var allowanceFosterCare: Allowance = new Allowance('FOSTERCARE', 61.79, new Category('cat1', 'pleeg'));
-  var allowanceOrphanCare: Allowance = new Allowance('ORPHANCARE', 80, new Category('cat1', 'Halve wees'));
+  var allowanceFosterCare: Allowance = new Allowance('CARE_FOSTER', 61.79, new Category('cat1', 'pleeg'));
+  var allowanceOrphanCare: Allowance = new Allowance('CARE_ORPHAN', 80, new Category('cat1', 'Halve wees'));
   var allowanceSocialCare: Allowance = new Allowance('SOCIAL', 80, new Category('cat1', 'sociaal'));
+  var allowanceUniversalParticipationCare: Allowance = new Allowance('PARTICIPATION_UNIVERSAL', 80, new Category('cat1', 'universele participatie 0_2'));
   let allowances: Allowance[] = [];
   allowances.push(allowanceBasic);
   allowances.push(allowanceFosterCare);
   allowances.push(allowanceOrphanCare);
   allowances.push(allowanceSocialCare);
+  allowances.push(allowanceUniversalParticipationCare);
   var expectedCalculation: Calculation = new Calculation(2019, 2, 'timestamp', allowances, 301.79);
 
   beforeEach(() => {
@@ -91,7 +93,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1'), new Entitlement('FOSTERCARE', 'cat1')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1'), new Entitlement('CARE_FOSTER', 'cat1')]));
     })();
   });
 
@@ -107,7 +109,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('FOSTERCARE', 'cat1')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('CARE_FOSTER', 'cat1')]));
     })();
   });
 
@@ -135,14 +137,14 @@ describe('CalculationComponent', () => {
       component.isFosterCareAllowanceGranted = false;
       component.isOrphanCareAllowanceGranted = 'cat1';
 
-      allowances.push(new Allowance('ORPHANCARE', 80, new Category('cat1', 'halve wees')));
+      allowances.push(new Allowance('CARE_ORPHAN', 80, new Category('cat1', 'halve wees')));
 
       calculationService.calculation = expectedCalculation;
 
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1'), new Entitlement('ORPHANCARE', 'cat1')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1'), new Entitlement('CARE_ORPHAN', 'cat1')]));
     })();
   });
 
@@ -162,6 +164,26 @@ describe('CalculationComponent', () => {
 
       expect(component.calculation).toEqual(expectedCalculation);
       expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1'), new Entitlement('SOCIAL', 'cat1')]));
+    })();
+  });
+
+  it('calculate should delegate to CalculationService when UniversalParticipationCareGranted is checked', () => {
+    inject([CalculationService], (calculationService: CalculationServiceMock) => {
+      component.year = 2019;
+      component.month = 2;
+      component.isBasicAllowanceGranted = false;
+      component.isFosterCareAllowanceGranted = false;
+      component.isSocialAllowanceGranted = false;
+      component.isUniversalParticipationGranted = 'cat1';
+
+      allowances.push(new Allowance('PARTICIPATION_UNIVERSAL', 50, new Category('cat1', 'universele participatie 0_2')));
+
+      calculationService.calculation = expectedCalculation;
+
+      component.calculate();
+
+      expect(component.calculation).toEqual(expectedCalculation);
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('PARTICIPATION_UNIVERSAL', 'cat1')]));
     })();
   });
 

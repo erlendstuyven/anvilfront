@@ -8,6 +8,7 @@ export class CalculationPage {
   private _isFosterCareAllowanceGranted = element(by.id('isFosterCareAllowanceGranted'));
   private _isOrphanCareAllowanceGranted = element(by.id('isOrphanCareAllowanceGranted'));
   private _isSocialAllowanceGranted = element(by.id('isSocialAllowanceGranted'));
+  private _isUniversalParticipationGranted = element(by.id('isUniversalParticipationGranted'));
   private _total = element(by.id('total'));
 
   navigateTo() {
@@ -47,6 +48,10 @@ export class CalculationPage {
 
   isSocialAllowanceGranted(category: string) {
     return this._isSocialAllowanceGranted.sendKeys(category);
+  }
+
+  isUniversalParticipationGranted(category: string) {
+    return this._isUniversalParticipationGranted.sendKeys(category);
   }
 
   getTotal(type)  {
