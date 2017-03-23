@@ -28,8 +28,8 @@ describe('File Form Page', function () {
     let newVar = {
       allowances: [
         new Allowance('BASIC', 160, new Category('cat1', 'basic')),
-        new Allowance('FOSTERCARE', 61.79, new Category('cat1', 'pleeg')),
-        new Allowance('ORPHANCARE', 80, new Category('cat1', 'Halve wees')),
+        new Allowance('CARE_FOSTER', 61.79, new Category('cat1', 'pleeg')),
+        new Allowance('CARE_ORPHAN', 80, new Category('cat1', 'Halve wees')),
         new Allowance('SOCIAL', 50, new Category('cat1', 'sociaal'))
       ]
     };
@@ -39,8 +39,8 @@ describe('File Form Page', function () {
       month : 2,
       entitlements : [
         new Entitlement('BASIC', 'cat1'),
-        new Entitlement('FOSTERCARE', 'cat1'),
-        new Entitlement('ORPHANCARE', 'cat1'),
+        new Entitlement('CARE_FOSTER', 'cat1'),
+        new Entitlement('CARE_ORPHAN', 'cat1'),
         new Entitlement('SOCIAL', 'cat1')
       ]
     };
@@ -74,8 +74,8 @@ describe('File Form Page', function () {
     page.calculate();
 
     expect(page.getAllowanceValue('BASIC')).toEqual('160');
-    expect(page.getAllowanceValue('FOSTERCARE')).toEqual('61.79');
-    expect(page.getAllowanceValue('ORPHANCARE')).toEqual('80');
+    expect(page.getAllowanceValue('CARE_FOSTER')).toEqual('61.79');
+    expect(page.getAllowanceValue('CARE_ORPHAN')).toEqual('80');
     expect(page.getAllowanceValue('SOCIAL')).toEqual('50');
   });
 

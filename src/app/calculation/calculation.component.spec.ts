@@ -17,8 +17,8 @@ describe('CalculationComponent', () => {
 
 
   var allowanceBasic: Allowance = new Allowance('BASIC', 160, new Category('cat1', 'basic'));
-  var allowanceFosterCare: Allowance = new Allowance('FOSTERCARE', 61.79, new Category('cat1', 'pleeg'));
-  var allowanceOrphanCare: Allowance = new Allowance('ORPHANCARE', 80, new Category('cat1', 'Halve wees'));
+  var allowanceFosterCare: Allowance = new Allowance('CARE_FOSTER', 61.79, new Category('cat1', 'pleeg'));
+  var allowanceOrphanCare: Allowance = new Allowance('CARE_ORPHAN', 80, new Category('cat1', 'Halve wees'));
   var allowanceSocialCare: Allowance = new Allowance('SOCIAL', 80, new Category('cat1', 'sociaal'));
   let allowances: Allowance[] = [];
   allowances.push(allowanceBasic);
@@ -91,7 +91,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1'), new Entitlement('FOSTERCARE', 'cat1')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1'), new Entitlement('CARE_FOSTER', 'cat1')]));
     })();
   });
 
@@ -107,7 +107,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('FOSTERCARE', 'cat1')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('CARE_FOSTER', 'cat1')]));
     })();
   });
 
@@ -135,14 +135,14 @@ describe('CalculationComponent', () => {
       component.isFosterCareAllowanceGranted = false;
       component.isOrphanCareAllowanceGranted = 'cat1';
 
-      allowances.push(new Allowance('ORPHANCARE', 80, new Category('cat1', 'halve wees')));
+      allowances.push(new Allowance('CARE_ORPHAN', 80, new Category('cat1', 'halve wees')));
 
       calculationService.calculation = expectedCalculation;
 
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1'), new Entitlement('ORPHANCARE', 'cat1')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1'), new Entitlement('CARE_ORPHAN', 'cat1')]));
     })();
   });
 
