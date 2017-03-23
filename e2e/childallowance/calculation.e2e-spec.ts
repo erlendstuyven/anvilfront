@@ -69,8 +69,8 @@ describe('File Form Page', function () {
     page.setMonth(2);
     page.isFosterCareAllowanceGranted.click();
     page.isBasicAllowanceGranted.click();
-    page.isOrphanCareAllowanceGranted('halve wees');
-    page.isSocialAllowanceGranted('sociaal');
+    page.isOrphanCareAllowanceGranted('wezentoeslag 50%');
+    page.isSocialAllowanceGranted('sociale toeslag, laag inkomen, max 2 kids');
     page.calculate();
 
     expect(page.getAllowanceValue('BASIC')).toEqual('160');
