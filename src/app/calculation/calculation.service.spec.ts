@@ -35,18 +35,32 @@ describe('CalculationService', () => {
 
       let entitlements: Entitlement[] = [];
       entitlements.push(new Entitlement('BASIC', 'cat1'));
-      entitlements.push(new Entitlement('FOSTERCARE', 'cat1'));
-      entitlements.push(new Entitlement('ORPHANCARE', 'cat1'));
+      entitlements.push(new Entitlement('CARE_FOSTER', 'cat1'));
+      entitlements.push(new Entitlement('CARE_ORPHAN', 'cat1'));
+      entitlements.push(new Entitlement('SOCIAL', 'cat1'));
+      entitlements.push(new Entitlement('PARTICIPATION_UNIVERSAL', 'cat1'));
+      entitlements.push(new Entitlement('DAY_CARE', 'cat1'));
+
 
       var allowanceBasic: Allowance = new Allowance('BASIC', 160, new Category('cat1', 'basic'));
-      var allowanceFosterCare: Allowance = new Allowance('FOSTERCARE', 61.79, new Category('cat1', 'pleeg'));
-      var allowanceOrphanCare: Allowance = new Allowance('ORPHANCARE', 80, new Category('cat1', 'halve wees'));
+      var allowanceFosterCare: Allowance = new Allowance('CARE_FOSTER', 61.79, new Category('cat1', 'pleeg'));
+      var allowanceOrphanCare: Allowance = new Allowance('CARE_ORPHAN', 80, new Category('cat1', 'halve wees'));
+      var allowanceSocialCare: Allowance = new Allowance('SOCIAL', 50, new Category('cat1', 'sociale toeslag, laag inkomen, max 2 kids'));
+      var allowanceParticipationUniversalCare: Allowance = new Allowance('PARTICIPATION_UNIVERSAL', 20, new Category('cat1', '0 - 2 jaar, groeipakket'));
+      var allowanceDayCare: Allowance = new Allowance('DAY_CARE', 3.17, new Category('cat1', 'Kinderopvangtoeslag, groeipakket'));
+
+
+
       let allowances: Allowance[] = [];
       allowances.push(allowanceBasic);
       allowances.push(allowanceFosterCare);
       allowances.push(allowanceOrphanCare);
+      allowances.push(allowanceSocialCare);
+      allowances.push(allowanceParticipationUniversalCare);
+      allowances.push(allowanceDayCare);
 
-      let calculation: Calculation = new Calculation(2, 2019, 'timestamp', allowances, 301.79);
+
+      let calculation: Calculation = new Calculation(2, 2019, 'timestamp', allowances, 374.96);
       let calculationRequest: CalculationRequest = new CalculationRequest(2019, 2, entitlements);
 
       mockBackend.connections.subscribe((connection) => {

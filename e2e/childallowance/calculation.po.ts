@@ -4,11 +4,14 @@ export class CalculationPage {
   private calculateButton = element(by.id('calculateButton'));
   private yearInput = element(by.id('year'));
   private monthInput = element(by.id('month'));
+  private dayCareDays = element(by.id('dayCareDays'));
   private _isBasicAllowanceGranted = element(by.id('isBasicAllowanceGranted'));
   private _isFosterCareAllowanceGranted = element(by.id('isFosterCareAllowanceGranted'));
   private _isOrphanCareAllowanceGranted = element(by.id('isOrphanCareAllowanceGranted'));
   private _isSocialAllowanceGranted = element(by.id('isSocialAllowanceGranted'));
   private _isUniversalParticipationGranted = element(by.id('isUniversalParticipationGranted'));
+  private _isDayCareAllowanceGranted = element(by.id('isDayCareAllowanceGranted'));
+
   private _total = element(by.id('total'));
 
   navigateTo() {
@@ -21,6 +24,10 @@ export class CalculationPage {
 
   setMonth = (month: number): void => {
     this.monthInput.sendKeys(month);
+  };
+
+  setDayCareDays = (dayCareDays: number): void => {
+    this.dayCareDays.sendKeys(dayCareDays);
   };
 
   calculate = (): void => {
@@ -42,6 +49,10 @@ export class CalculationPage {
     return this._isBasicAllowanceGranted;
   }
 
+  get isDayCareAllowanceGranted(): ElementFinder {
+    return this._isDayCareAllowanceGranted;
+  }
+
   isOrphanCareAllowanceGranted(category: string) {
     return this._isOrphanCareAllowanceGranted.sendKeys(category);
   }
@@ -57,6 +68,5 @@ export class CalculationPage {
   getTotal(type)  {
     return element(by.id('calculation.' + type)).getText();
   }
-
 
 }

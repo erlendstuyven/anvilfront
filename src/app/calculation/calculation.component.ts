@@ -3,7 +3,6 @@ import {CalculationService} from './calculation.service';
 import {CalculationRequest} from './calculation-request';
 import {Calculation} from './calculation';
 import {Entitlement} from './entitlement';
-import {element, by} from "protractor";
 
 @Component({
   selector: 'app-child-allowance',
@@ -13,11 +12,13 @@ export class CalculationComponent implements OnInit {
 
   year: number;
   month: number;
+  dayCareDays: number;
   isBasicAllowanceGranted: boolean;
   isFosterCareAllowanceGranted: boolean;
   isOrphanCareAllowanceGranted: string = "";
   isSocialAllowanceGranted: string = "";
   isUniversalParticipationGranted: string = "";
+  isDayCareAllowanceGranted: boolean;
 
   calculation: Calculation;
 
@@ -36,6 +37,10 @@ export class CalculationComponent implements OnInit {
 
     if (this.isFosterCareAllowanceGranted) {
       entitlements.push(new Entitlement('CARE_FOSTER', 'cat1'));
+    }
+
+    if (this.isDayCareAllowanceGranted) {
+      entitlements.push(new Entitlement('DAY_CARE', 'cat1', this.dayCareDays));
     }
 
 

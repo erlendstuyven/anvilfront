@@ -14,20 +14,7 @@ describe('CalculationComponent', () => {
 
   let component;
   let fixture: ComponentFixture<CalculationComponent>;
-
-
-  var allowanceBasic: Allowance = new Allowance('BASIC', 160, new Category('cat1', 'basic'));
-  var allowanceFosterCare: Allowance = new Allowance('CARE_FOSTER', 61.79, new Category('cat1', 'pleeg'));
-  var allowanceOrphanCare: Allowance = new Allowance('CARE_ORPHAN', 80, new Category('cat1', 'Halve wees'));
-  var allowanceSocialCare: Allowance = new Allowance('SOCIAL', 80, new Category('cat1', 'sociaal'));
-  var allowanceUniversalParticipationCare: Allowance = new Allowance('PARTICIPATION_UNIVERSAL', 80, new Category('cat1', 'universele participatie 0_2'));
-  let allowances: Allowance[] = [];
-  allowances.push(allowanceBasic);
-  allowances.push(allowanceFosterCare);
-  allowances.push(allowanceOrphanCare);
-  allowances.push(allowanceSocialCare);
-  allowances.push(allowanceUniversalParticipationCare);
-  var expectedCalculation: Calculation = new Calculation(2019, 2, 'timestamp', allowances, 301.79);
+  let expectedCalculation: Calculation = new Calculation(2019, 2, 'timestamp', [], 301.79);
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -137,8 +124,6 @@ describe('CalculationComponent', () => {
       component.isFosterCareAllowanceGranted = false;
       component.isOrphanCareAllowanceGranted = 'cat1';
 
-      allowances.push(new Allowance('CARE_ORPHAN', 80, new Category('cat1', 'halve wees')));
-
       calculationService.calculation = expectedCalculation;
 
       component.calculate();
@@ -148,15 +133,13 @@ describe('CalculationComponent', () => {
     })();
   });
 
-  it('calculate should delegate to CalculationService when BasicAllowanceGranted is checked and Social sociaal is checked', () => {
+  it('calculate should delegate to CalculationService when BasicAllowanceGranted is checked and Social is checked', () => {
     inject([CalculationService], (calculationService: CalculationServiceMock) => {
       component.year = 2019;
       component.month = 2;
       component.isBasicAllowanceGranted = true;
       component.isFosterCareAllowanceGranted = false;
       component.isSocialAllowanceGranted = 'cat1';
-
-      allowances.push(new Allowance('SOCIAL', 50, new Category('cat1', 'sociaal')));
 
       calculationService.calculation = expectedCalculation;
 
@@ -176,14 +159,32 @@ describe('CalculationComponent', () => {
       component.isSocialAllowanceGranted = false;
       component.isUniversalParticipationGranted = 'cat1';
 
-      allowances.push(new Allowance('PARTICIPATION_UNIVERSAL', 50, new Category('cat1', 'universele participatie 0_2')));
-
       calculationService.calculation = expectedCalculation;
 
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
       expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('PARTICIPATION_UNIVERSAL', 'cat1')]));
+    })();
+  });
+
+  it('calculate should delegate to CalculationService when DayCareDaysGranted is checked', () => {
+    inject([CalculationService], (calculationService: CalculationServiceMock) => {
+      component.year = 2019;
+      component.month = 2;
+      component.isBasicAllowanceGranted = false;
+      component.isFosterCareAllowanceGranted = false;
+      component.isSocialAllowanceGranted = false;
+      component.isUniversalParticipationGranted = '';
+      component.isDayCareAllowanceGranted = true;
+      component.dayCareDays = 20;
+
+      calculationService.calculation = expectedCalculation;
+
+      component.calculate();
+
+      expect(component.calculation).toEqual(expectedCalculation);
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('DAY_CARE', 'cat1', 20)]));
     })();
   });
 
