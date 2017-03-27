@@ -64,7 +64,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIS', 'cat1')]));
     })();
   });
 
@@ -80,7 +80,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1'), new Entitlement('CARE_FOSTER', 'cat1')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIS', 'cat1'), new Entitlement('ZORG_PLEEG', 'cat1')]));
     })();
   });
 
@@ -96,7 +96,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('CARE_FOSTER', 'cat1')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('ZORG_PLEEG', 'cat1')]));
     })();
   });
 
@@ -112,7 +112,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIS', 'cat1')]));
     })();
   });
 
@@ -129,7 +129,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1'), new Entitlement('CARE_ORPHAN', 'cat1')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIS', 'cat1'), new Entitlement('ZORG_WEES', 'cat1')]));
     })();
   });
 
@@ -146,7 +146,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIC', 'cat1'), new Entitlement('SOCIAL', 'cat1')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIS', 'cat1'), new Entitlement('SOCIAAL', 'cat1')]));
     })();
   });
 
@@ -164,7 +164,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('PARTICIPATION_UNIVERSAL', 'cat1')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('PARTICIPATIE_UNIVERSEEL', 'cat1')]));
     })();
   });
 
@@ -184,7 +184,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('DAY_CARE', 'cat1', 20)]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('KINDEROPVANG', 'cat1', 20)]));
     })();
   });
 
@@ -205,7 +205,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('KLEUTER_TOESLAG', 'cat1')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('KLEUTER', 'cat1')]));
     })();
   });
 

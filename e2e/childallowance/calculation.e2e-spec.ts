@@ -30,13 +30,13 @@ describe('File Form Page', function () {
 
     let newVar = {
       allowances: [
-        new Allowance('BASIC', 160, new Category('cat1', 'basisbedrag')),
-        new Allowance('CARE_FOSTER', 61.79, new Category('cat1', 'pleegzorgtoeslag')),
-        new Allowance('CARE_ORPHAN', 80, new Category('cat1', 'wezentoeslag 50%')),
-        new Allowance('SOCIAL', 50, new Category('cat1', 'sociale toeslag, laag inkomen, max 2 kids')),
-        new Allowance('PARTICIPATION_UNIVERSAL', 20, new Category('cat1', 'universele participatie 0_2')),
-        new Allowance('DAY_CARE', 31.7, new Category('cat1', 'kinderopvangtoeslag')),
-        new Allowance('KLEUTER_TOESLAG', 150, new Category('cat1', 'kleutertoeslag 3 jaar'))
+        new Allowance('BASIS', 160, new Category('cat1', 'basisbedrag')),
+        new Allowance('ZORG_PLEEG', 61.79, new Category('cat1', 'pleegzorgtoeslag')),
+        new Allowance('ZORG_WEES', 80, new Category('cat1', 'wezentoeslag 50%')),
+        new Allowance('SOCIAAL', 50, new Category('cat1', 'sociale toeslag, laag inkomen, max 2 kids')),
+        new Allowance('PARTICIPATIE_UNIVERSEEL', 20, new Category('cat1', 'universele participatie 0_2')),
+        new Allowance('KINDEROPVANG', 31.7, new Category('cat1', 'kinderopvangtoeslag')),
+        new Allowance('KLEUTER', 150, new Category('cat1', 'kleutertoeslag 3 jaar'))
 
       ]
     };
@@ -45,13 +45,13 @@ describe('File Form Page', function () {
       year: 2019,
       month: 2,
       entitlements: [
-        new Entitlement('BASIC', 'cat1'),
-        new Entitlement('CARE_FOSTER', 'cat1'),
-        new Entitlement('CARE_ORPHAN', 'cat1'),
-        new Entitlement('SOCIAL', 'cat1'),
-        new Entitlement('PARTICIPATION_UNIVERSAL', 'cat1'),
-        new Entitlement('DAY_CARE', 'cat1', 10),
-        new Entitlement('KLEUTER_TOESLAG', 'cat1')
+        new Entitlement('BASIS', 'cat1'),
+        new Entitlement('ZORG_PLEEG', 'cat1'),
+        new Entitlement('ZORG_WEES', 'cat1'),
+        new Entitlement('SOCIAAL', 'cat1'),
+        new Entitlement('PARTICIPATIE_UNIVERSEEL', 'cat1'),
+        new Entitlement('KINDEROPVANG', 'cat1', 10),
+        new Entitlement('KLEUTER', 'cat1')
       ]
     };
 
@@ -90,13 +90,13 @@ describe('File Form Page', function () {
     // setTimeout function added because daycare implementation causes test to fail. Expectation doesn't wait for the response which takes longer then normal.
     setTimeout(function () {
 
-      expect(page.getAllowanceValue('BASIC')).toEqual('160');
-      expect(page.getAllowanceValue('CARE_FOSTER')).toEqual('61.79');
-      expect(page.getAllowanceValue('CARE_ORPHAN')).toEqual('80');
-      expect(page.getAllowanceValue('SOCIAL')).toEqual('50');
-      expect(page.getAllowanceValue('PARTICIPATION_UNIVERSAL')).toEqual('20');
-      expect(page.getAllowanceValue('DAY_CARE')).toEqual('31.7');
-      expect(page.getAllowanceValue('KLEUTER_TOESLAG')).toEqual('150');
+      expect(page.getAllowanceValue('BASIS')).toEqual('160');
+      expect(page.getAllowanceValue('ZORG_PLEEG')).toEqual('61.79');
+      expect(page.getAllowanceValue('ZORG_WEES')).toEqual('80');
+      expect(page.getAllowanceValue('SOCIAAL')).toEqual('50');
+      expect(page.getAllowanceValue('PARTICIPATIE_UNIVERSEEL')).toEqual('20');
+      expect(page.getAllowanceValue('KINDEROPVANG')).toEqual('31.7');
+      expect(page.getAllowanceValue('KLEUTER')).toEqual('150');
     }, 5000);
 
   });

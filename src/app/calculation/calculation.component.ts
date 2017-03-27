@@ -33,32 +33,32 @@ export class CalculationComponent implements OnInit {
     let entitlements: Entitlement[] = [];
 
     if (this.isBasicAllowanceGranted) {
-      entitlements.push(new Entitlement('BASIC', 'cat1'));
+      entitlements.push(new Entitlement('BASIS', 'cat1'));
     }
 
     if (this.isFosterCareAllowanceGranted) {
-      entitlements.push(new Entitlement('CARE_FOSTER', 'cat1'));
+      entitlements.push(new Entitlement('ZORG_PLEEG', 'cat1'));
     }
 
     if (this.isDayCareAllowanceGranted) {
-      entitlements.push(new Entitlement('DAY_CARE', 'cat1', this.dayCareDays));
+      entitlements.push(new Entitlement('KINDEROPVANG', 'cat1', this.dayCareDays));
     }
 
 
     if (this.isOrphanCareAllowanceGranted.length > 0) {
-      entitlements.push(new Entitlement('CARE_ORPHAN', this.isOrphanCareAllowanceGranted));
+      entitlements.push(new Entitlement('ZORG_WEES', this.isOrphanCareAllowanceGranted));
     }
 
     if (this.isSocialAllowanceGranted.length > 0) {
-      entitlements.push(new Entitlement('SOCIAL', this.isSocialAllowanceGranted));
+      entitlements.push(new Entitlement('SOCIAAL', this.isSocialAllowanceGranted));
     }
 
     if (this.isUniversalParticipationGranted.length > 0) {
-      entitlements.push(new Entitlement('PARTICIPATION_UNIVERSAL', this.isUniversalParticipationGranted));
+      entitlements.push(new Entitlement('PARTICIPATIE_UNIVERSEEL', this.isUniversalParticipationGranted));
     }
 
     if (this.isKleuterToeslagGranted.length > 0) {
-      entitlements.push(new Entitlement('KLEUTER_TOESLAG', this.isKleuterToeslagGranted));
+      entitlements.push(new Entitlement('KLEUTER', this.isKleuterToeslagGranted));
     }
 
 
