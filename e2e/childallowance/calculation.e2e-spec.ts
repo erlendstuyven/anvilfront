@@ -35,7 +35,9 @@ describe('File Form Page', function () {
         new Allowance('CARE_ORPHAN', 80, new Category('cat1', 'wezentoeslag 50%')),
         new Allowance('SOCIAL', 50, new Category('cat1', 'sociale toeslag, laag inkomen, max 2 kids')),
         new Allowance('PARTICIPATION_UNIVERSAL', 20, new Category('cat1', 'universele participatie 0_2')),
-        new Allowance('DAY_CARE', 31.7, new Category('cat1', 'kinderopvangtoeslag'))
+        new Allowance('DAY_CARE', 31.7, new Category('cat1', 'kinderopvangtoeslag')),
+        new Allowance('KLEUTER_TOESLAG', 150, new Category('cat1', 'kleutertoeslag 3 jaar'))
+
       ]
     };
 
@@ -48,7 +50,8 @@ describe('File Form Page', function () {
         new Entitlement('CARE_ORPHAN', 'cat1'),
         new Entitlement('SOCIAL', 'cat1'),
         new Entitlement('PARTICIPATION_UNIVERSAL', 'cat1'),
-        new Entitlement('DAY_CARE', 'cat1', 10)
+        new Entitlement('DAY_CARE', 'cat1', 10),
+        new Entitlement('KLEUTER_TOESLAG', 'cat1')
       ]
     };
 
@@ -81,6 +84,7 @@ describe('File Form Page', function () {
     page.isUniversalParticipationGranted('universele participatie 0_2');
     page.isDayCareAllowanceGranted.click();
     page.setDayCareDays(10);
+    page.isKleuterToeslagGranted('kleutertoeslag 3 jaar');
     page.calculate();
 
     // setTimeout function added because daycare implementation causes test to fail. Expectation doesn't wait for the response which takes longer then normal.
@@ -92,6 +96,7 @@ describe('File Form Page', function () {
       expect(page.getAllowanceValue('SOCIAL')).toEqual('50');
       expect(page.getAllowanceValue('PARTICIPATION_UNIVERSAL')).toEqual('20');
       expect(page.getAllowanceValue('DAY_CARE')).toEqual('31.7');
+      expect(page.getAllowanceValue('KLEUTER_TOESLAG')).toEqual('150');
     }, 5000);
 
   });

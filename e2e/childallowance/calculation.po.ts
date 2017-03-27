@@ -11,6 +11,7 @@ export class CalculationPage {
   private _isSocialAllowanceGranted = element(by.id('isSocialAllowanceGranted'));
   private _isUniversalParticipationGranted = element(by.id('isUniversalParticipationGranted'));
   private _isDayCareAllowanceGranted = element(by.id('isDayCareAllowanceGranted'));
+  private _isKleuterToeslagGranted = element(by.id('isKleuterToeslagGranted'));
 
   private _total = element(by.id('total'));
 
@@ -63,6 +64,10 @@ export class CalculationPage {
 
   isUniversalParticipationGranted(category: string) {
     return this._isUniversalParticipationGranted.sendKeys(category);
+  }
+
+  isKleuterToeslagGranted(category: string) {
+    return this._isKleuterToeslagGranted.sendKeys(category);
   }
 
   getTotal(type)  {

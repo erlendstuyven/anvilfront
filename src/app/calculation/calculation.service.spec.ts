@@ -40,6 +40,7 @@ describe('CalculationService', () => {
       entitlements.push(new Entitlement('SOCIAL', 'cat1'));
       entitlements.push(new Entitlement('PARTICIPATION_UNIVERSAL', 'cat1'));
       entitlements.push(new Entitlement('DAY_CARE', 'cat1'));
+      entitlements.push(new Entitlement('KLEUTER_TOESLAG', 'cat1'));
 
 
       var allowanceBasic: Allowance = new Allowance('BASIC', 160, new Category('cat1', 'basic'));
@@ -48,6 +49,7 @@ describe('CalculationService', () => {
       var allowanceSocialCare: Allowance = new Allowance('SOCIAL', 50, new Category('cat1', 'sociale toeslag, laag inkomen, max 2 kids'));
       var allowanceParticipationUniversalCare: Allowance = new Allowance('PARTICIPATION_UNIVERSAL', 20, new Category('cat1', '0 - 2 jaar, groeipakket'));
       var allowanceDayCare: Allowance = new Allowance('DAY_CARE', 3.17, new Category('cat1', 'Kinderopvangtoeslag, groeipakket'));
+      var allowanceKleuterToeslag: Allowance = new Allowance('KLEUTER_TOESLAG', 150, new Category('cat1', 'kleutertoeslag 3 jaar'));
 
 
 
@@ -58,9 +60,10 @@ describe('CalculationService', () => {
       allowances.push(allowanceSocialCare);
       allowances.push(allowanceParticipationUniversalCare);
       allowances.push(allowanceDayCare);
+      allowances.push(allowanceKleuterToeslag);
 
 
-      let calculation: Calculation = new Calculation(2, 2019, 'timestamp', allowances, 374.96);
+      let calculation: Calculation = new Calculation(2, 2019, 'timestamp', allowances, 524.96);
       let calculationRequest: CalculationRequest = new CalculationRequest(2019, 2, entitlements);
 
       mockBackend.connections.subscribe((connection) => {

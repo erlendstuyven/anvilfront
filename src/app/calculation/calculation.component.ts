@@ -19,6 +19,7 @@ export class CalculationComponent implements OnInit {
   isSocialAllowanceGranted: string = "";
   isUniversalParticipationGranted: string = "";
   isDayCareAllowanceGranted: boolean;
+  isKleuterToeslagGranted: string = "";
 
   calculation: Calculation;
 
@@ -54,6 +55,10 @@ export class CalculationComponent implements OnInit {
 
     if (this.isUniversalParticipationGranted.length > 0) {
       entitlements.push(new Entitlement('PARTICIPATION_UNIVERSAL', this.isUniversalParticipationGranted));
+    }
+
+    if (this.isKleuterToeslagGranted.length > 0) {
+      entitlements.push(new Entitlement('KLEUTER_TOESLAG', this.isKleuterToeslagGranted));
     }
 
 
