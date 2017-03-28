@@ -29,7 +29,15 @@ export class CalculationService {
 
         data.allowances.forEach(a => {
 
-
+        if(a.beneficiary) {
+          if (!a.category) {
+            allowances.push(new Allowance(a.type, a.value, a.beneficiary));
+          }
+          else {
+            var cat = new Category(a.category.name, a.category.description);
+            allowances.push(new Allowance(a.type, a.value, cat, a.beneficiary));
+          }
+        } else {
           if (!a.category) {
             allowances.push(new Allowance(a.type, a.value));
           }
@@ -37,6 +45,8 @@ export class CalculationService {
             var cat = new Category(a.category.name, a.category.description);
             allowances.push(new Allowance(a.type, a.value, cat));
           }
+        }
+
           total = total + a.value;
         });
         return new Calculation(data.year, data.month, data.timestamp, allowances, Math.round(total * 100) / 100);

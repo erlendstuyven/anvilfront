@@ -5,7 +5,7 @@
 </div>
 
 <form class="form-horizontal">
-  <div class="form-group" style="margin-left: 0px">
+  <div class="form-group" style="margin-left: 0px;">
     <div class="col-sm-3">
       <div class="form-group row">
         <label class="sr-only" for="month">maand</label>
@@ -41,7 +41,7 @@
   <div class="form-group">
     <label class="col-sm-3">Recht op wezentoeslag</label>
     <div class="col-sm-3">
-      <div class="form-group row" style="margin-left: 0px">
+      <div class="form-group row" style="margin-left: 0px;">
         <select [(ngModel)]="isOrphanCareAllowanceGranted" class="form-control" id="isOrphanCareAllowanceGranted" name="isOrphanCareAllowanceGranted">
           <option></option>
           <option value='cat1'>wezentoeslag 50%</option>
@@ -51,16 +51,45 @@
     </div>
   </div>
 
-  <div class="form-group" >
-    <label class="col-sm-3">Recht op sociaaltoeslag</label>
-    <div class="col-sm-3">
-      <div class="form-group row" style="margin-left: 0px">
-        <select [(ngModel)]="isSocialAllowanceGranted" class="form-control" id="isSocialAllowanceGranted" name="isSocialAllowanceGranted">
+  <div class="form-group">
+    <label class="col-sm-3">Recht op sociaaltoeslag Gezin 1</label>
+    <div class="form-group row" style="margin-left: 0px;">
+      <div class="col-sm-3">
+          <select [(ngModel)]="isSocialAllowanceGrantedFamilyOne" class="form-control"
+                  id="isSocialAllowanceGrantedFamilyOne" name="isSocialAllowanceGrantedFamilyOne">
+            <option></option>
+            <option value='cat1'>sociale toeslag, laag inkomen, max 2 kids</option>
+            <option value='cat2'>sociale toeslag, laag inkomen, meer dan 2 kids</option>
+            <option value='cat3'>sociale toeslag, gemiddeld inkomen, meer dan 2 kids</option>
+          </select>
+          <label class="sr-only" for="housingShareFamilyOne">% huisvesting</label>
+          <input type="number" class="form-control" id="housingShareFamilyOne" name="housingShareFamilyOne"
+                 [(ngModel)]="housingShareFamilyOne" placeholder="% huisvesting">
+        <label class="sr-only" for="beneficiaryFamilyOne">begunstigde</label>
+        <input type="string" class="form-control" id="beneficiaryFamilyOne" name="beneficiaryFamilyOne"
+               [(ngModel)]="beneficiaryFamilyOne" placeholder="begunstigde">
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <label class="col-sm-3">Recht op sociaaltoeslag Gezin 2</label>
+    <div class="form-group row"style="margin-left: 0px;">
+      <div class="col-sm-3">
+        <select [(ngModel)]="isSocialAllowanceGrantedFamilyTwo" class="form-control"
+                id="isSocialAllowanceGrantedFamilyTwo" name="isSocialAllowanceGrantedFamilyTwo">
           <option></option>
           <option value='cat1'>sociale toeslag, laag inkomen, max 2 kids</option>
           <option value='cat2'>sociale toeslag, laag inkomen, meer dan 2 kids</option>
           <option value='cat3'>sociale toeslag, gemiddeld inkomen, meer dan 2 kids</option>
         </select>
+        <label class="sr-only" for="housingShareFamilyTwo">% huisvesting</label>
+        <input type="number" class="form-control" id="housingShareFamilyTwo" name="housingShareFamilyTwo"
+               [(ngModel)]="housingShareFamilyTwo" placeholder="% huisvesting">
+        <label class="sr-only" for="beneficiaryFamilyTwo">begunstigde</label>
+        <input type="string" class="form-control" id="beneficiaryFamilyTwo" name="beneficiaryFamilyTwo"
+               [(ngModel)]="beneficiaryFamilyTwo" placeholder="begunstigde">
       </div>
     </div>
   </div>
@@ -68,7 +97,7 @@
   <div class="form-group" >
     <label class="col-sm-3">Recht op universele participatie toeslag</label>
     <div class="col-sm-3">
-      <div class="form-group row" style="margin-left: 0px">
+      <div class="form-group row" style="margin-left: 0px;">
         <select [(ngModel)]="isUniversalParticipationGranted" class="form-control" id="isUniversalParticipationGranted" name="isUniversalParticipationGranted">
           <option></option>
           <option value='cat1'>universele participatie 0_2</option>
@@ -95,7 +124,7 @@
   <div class="form-group" >
     <label class="col-sm-3">Recht op kleutertoeslag</label>
     <div class="col-sm-3">
-      <div class="form-group row" style="margin-left: 0px">
+      <div class="form-group row" style="margin-left: 0px;">
         <select [(ngModel)]="isKleuterToeslagGranted" class="form-control" id="isKleuterToeslagGranted" name="isKleuterToeslagGranted">
           <option></option>
           <option value='cat1'>kleutertoeslag 3 jaar</option>
@@ -104,6 +133,7 @@
       </div>
     </div>
   </div>
+
 
 </form>
 
@@ -131,6 +161,8 @@
         <td>{{allowance.type}}</td>
         <td>&euro; <span id="allowance_{{allowance.type}}_value">{{allowance.value}}</span></td>
         <td>{{calculation.timestamp}}</td>
+        <td *ngIf="allowance.beneficiary">{{allowance.beneficiary}}</td>
+        <td *ngIf="!allowance.beneficiary"></td>
         <td *ngIf="allowance.category">{{allowance.category.description}}</td>
         <td *ngIf="!allowance.category"></td>
       </tr>

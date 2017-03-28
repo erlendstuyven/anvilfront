@@ -4,6 +4,8 @@ import {Allowance} from "../../src/app/calculation/allowance";
 import {Entitlement} from "../../src/app/calculation/entitlement";
 import {Category} from "../../src/app/calculation/category";
 import {browser, element, by} from "protractor";
+import {Social} from "../../src/app/calculation/social";
+import {DayCare} from "../../src/app/calculation/daycare";
 
 var mockserver = require('mockserver-grunt');
 var mockServerClient = require('mockserver-client').mockServerClient;
@@ -48,9 +50,9 @@ describe('File Form Page', function () {
         new Entitlement('BASIS', 'cat1'),
         new Entitlement('ZORG_PLEEG', 'cat1'),
         new Entitlement('ZORG_WEES', 'cat1'),
-        new Entitlement('SOCIAAL', 'cat1'),
+        new Social('SOCIAAL', 'cat1', 50, 'thomas'),
         new Entitlement('PARTICIPATIE_UNIVERSEEL', 'cat1'),
-        new Entitlement('KINDEROPVANG', 'cat1', 10),
+        new DayCare('KINDEROPVANG', 'cat1', 10),
         new Entitlement('KLEUTER', 'cat1')
       ]
     };
@@ -80,7 +82,9 @@ describe('File Form Page', function () {
     page.isBasicAllowanceGranted.click();
     page.isFosterCareAllowanceGranted.click();
     page.isOrphanCareAllowanceGranted('wezentoeslag 50%');
-    page.isSocialAllowanceGranted('sociale toeslag, laag inkomen, max 2 kids');
+    page.isSocialAllowanceGrantedFamilyOne('sociale toeslag, laag inkomen, max 2 kids');
+    page.housingShareFamilyOne(50);
+    page.beneficiaryFamilyOne('thomas');
     page.isUniversalParticipationGranted('universele participatie 0_2');
     page.isDayCareAllowanceGranted.click();
     page.setDayCareDays(10);
@@ -93,7 +97,7 @@ describe('File Form Page', function () {
       expect(page.getAllowanceValue('BASIS')).toEqual('160');
       expect(page.getAllowanceValue('ZORG_PLEEG')).toEqual('61.79');
       expect(page.getAllowanceValue('ZORG_WEES')).toEqual('80');
-      expect(page.getAllowanceValue('SOCIAAL')).toEqual('50');
+      expect(page.getAllowanceValue('SOCIAAL')).toEqual('25');
       expect(page.getAllowanceValue('PARTICIPATIE_UNIVERSEEL')).toEqual('20');
       expect(page.getAllowanceValue('KINDEROPVANG')).toEqual('31.7');
       expect(page.getAllowanceValue('KLEUTER')).toEqual('150');
