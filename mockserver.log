@@ -1,3 +1,0 @@
-2017-03-27 14:17:03,029 WARN [nioEventLoopGroup-3-4] o.m.c.s.ObjectMapperFactory [?:?] Ignoring invalid value for "type" field of "BASIS"
-2017-03-27 14:17:03,049 WARN [nioEventLoopGroup-3-4] o.m.c.s.ObjectMapperFactory [?:?] Ignoring invalid value for "type" field of "BASIS"
-2017-03-27 14:17:03,053 WARN [nioEventLoopGroup-3-4] o.m.c.s.ObjectMapperFactory [?:?] Ignoring invalid value for "type" field of "BASIS"
