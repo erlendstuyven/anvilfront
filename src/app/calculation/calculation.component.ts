@@ -27,6 +27,7 @@ export class CalculationComponent implements OnInit {
   isUniversalParticipationGranted: string = "";
   isDayCareAllowanceGranted: boolean;
   isKleuterToeslagGranted: string = "";
+  isZorgToeslagGranted: string = "";
 
   calculation: Calculation;
 
@@ -74,6 +75,10 @@ export class CalculationComponent implements OnInit {
 
     if (this.isKleuterToeslagGranted.length > 0) {
       entitlements.push(new Entitlement('KLEUTER', this.isKleuterToeslagGranted));
+    }
+
+    if (this.isZorgToeslagGranted.length > 0) {
+      entitlements.push(new Entitlement('ZORG_SPECIALE_NODEN', this.isZorgToeslagGranted));
     }
 
 

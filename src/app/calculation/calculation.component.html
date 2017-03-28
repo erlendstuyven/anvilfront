@@ -134,6 +134,29 @@
     </div>
   </div>
 
+  <div class="form-group" >
+    <label class="col-sm-3">Recht op zorgtoeslag met specifieke ondersteuningsbehoefte</label>
+    <div class="col-sm-3">
+      <div class="form-group row" style="margin-left: 0px;">
+        <select [(ngModel)]="isZorgToeslagGranted" class="form-control" id="isZorgToeslagGranted" name="isZorgToeslagGranted">
+          <option></option>
+          <option value='cat1'>Cat.1: zorgtoeslag spec. ond. T<6 en 1ep>=4</option>
+          <option value='cat2'>Cat.2: zorgtoeslag spec. ond. 6<=T<=8 en 1ep<4</option>
+          <option value='cat3'>Cat.3: zorgtoeslag spec. ond. 6<=T<=8 en 1ep>=4</option>
+          <option value='cat4'>Cat.4: zorgtoeslag spec. ond. 9<=T<=11 en 1ep<4</option>
+          <option value='cat5'>Cat.5: zorgtoeslag spec. ond. 9<=T<=11 en 1ep>=4</option>
+          <option value='cat6'>Cat.6: zorgtoeslag spec. ond. 12<=T<=14</option>
+          <option value='cat7'>Cat.7: zorgtoeslag spec. ond. 15<=T<=17</option>
+          <option value='cat8'>Cat.8: zorgtoeslag spec. ond. 18<=T<=20</option>
+          <option value='cat9'>Cat.9: zorgtoeslag spec. ond. T>20</option>
+          <option value='cat10'>Cat.10: zorgtoeslag spec. ond. zelfred. 0_3</option>
+          <option value='cat11'>Cat.11: zorgtoeslag spec. ond. zelfred. 4_6</option>
+          <option value='cat12'>Cat.12: zorgtoeslag spec. ond. zelfred. 7_9</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
 
 </form>
 
