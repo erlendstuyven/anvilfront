@@ -1,4 +1,4 @@
-import {browser, element, by, ElementFinder} from 'protractor';
+import {browser, by, element, ElementFinder} from "protractor";
 export class CalculationPage {
 
   private calculateButton = element(by.id('calculateButton'));
@@ -26,15 +26,15 @@ export class CalculationPage {
   }
 
   setYear = (year: number): void => {
-    this.yearInput.sendKeys(year);
+    this.yearInput.sendKeys(String(year));
   };
 
   setMonth = (month: number): void => {
-    this.monthInput.sendKeys(month);
+    this.monthInput.sendKeys(String(month));
   };
 
   setDayCareDays = (dayCareDays: number): void => {
-    this.dayCareDays.sendKeys(dayCareDays);
+    this.dayCareDays.sendKeys(String(dayCareDays));
   };
 
   calculate = (): void => {
@@ -74,11 +74,11 @@ export class CalculationPage {
 
 
   housingShareFamilyOne(share: number) {
-    return this._housingShareFamilyOne.sendKeys(share);
+    return this._housingShareFamilyOne.sendKeys(String(share));
   }
 
   housingShareFamilyTwo(share: number) {
-    return this._housingShareFamilyTwo.sendKeys(share);
+    return this._housingShareFamilyTwo.sendKeys(String(share));
   }
 
   beneficiaryFamilyOne(share: string) {
