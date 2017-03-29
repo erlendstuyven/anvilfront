@@ -1,14 +1,11 @@
-import { ComponentFixture, async, TestBed, inject } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { CalculationComponent } from './calculation.component';
-import { CalculationService } from "./calculation.service";
-import { CalculationServiceMock } from "./calculation.service.mock";
-import { Calculation } from "./calculation";
-import {Allowance} from "./allowance";
+import {async, ComponentFixture, inject, TestBed} from "@angular/core/testing";
+import {FormsModule} from "@angular/forms";
+import {CalculationComponent} from "./calculation.component";
+import {CalculationService} from "./calculation.service";
+import {CalculationServiceMock} from "./calculation.service.mock";
+import {Calculation} from "./calculation";
 import {CalculationRequest} from "./calculation-request";
 import {Entitlement} from "./entitlement";
-import {Category} from "./category";
-import {All} from "tslint/lib/rules/completedDocsRule";
 import {Social} from "./social";
 import {DayCare} from "./daycare";
 

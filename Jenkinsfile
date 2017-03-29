@@ -15,7 +15,19 @@ node('jenkins-slave-frontend') {
 
     stage('Commit') {
         withEnv(getEnvironment()) {
-            sh 'npm install && npm run build'
+            wrap([$class: 'Xvfb']) {
+                ansiColor('xterm') {
+                    try {
+                        sh 'npm install && npm run ci'
+                    } catch (error) {
+                        echo 'The build has failed, copying the protractor reports to the artifacts.'
+                        archiveArtifacts artifacts: 'build/protractor/**'
+                        throw error
+                    } finally {
+                        step([$class: "JUnitResultArchiver", testResults: "build/test-results.xml", allowEmptyResults: true])
+                    }
+                }
+            }
         }
     }
 

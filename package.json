@@ -34,7 +34,7 @@
     "zone.js": "^0.7.2"
   },
   "devDependencies": {
-    "@angular/cli": "1.0.0-beta.31",
+    "@angular/cli": "^1.0.0",
     "@angular/compiler-cli": "^2.4.7",
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.42",
@@ -48,10 +48,12 @@
     "karma-cli": "^1.0.1",
     "karma-coverage-istanbul-reporter": "^0.2.0",
     "karma-jasmine": "^1.0.2",
+    "karma-junit-reporter": "^1.2.0",
+    "karma-phantomjs-launcher": "^1.0.4",
     "mockserver-client": "^1.0.12",
     "mockserver-grunt": "^1.0.33",
     "npm-run-all": "^4.0.1",
-    "protractor": "~5.1.0",
+    "protractor": "~4.0.13",
     "ts-node": "1.2.1",
     "tslint": "^4.3.0",
     "typescript": "~2.0.0"
