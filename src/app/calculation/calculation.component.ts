@@ -3,6 +3,8 @@ import {CalculationService} from './calculation.service';
 import {CalculationRequest} from './calculation-request';
 import {Calculation} from './calculation';
 import {Entitlement} from './entitlement';
+import {Social} from "./social";
+import {DayCare} from "./daycare";
 
 @Component({
   selector: 'app-child-allowance',
@@ -13,13 +15,19 @@ export class CalculationComponent implements OnInit {
   year: number;
   month: number;
   dayCareDays: number;
+  beneficiaryFamilyOne: string;
+  beneficiaryFamilyTwo: string;
+  housingShareFamilyOne: number;
+  housingShareFamilyTwo: number;
   isBasicAllowanceGranted: boolean;
   isFosterCareAllowanceGranted: boolean;
   isOrphanCareAllowanceGranted: string = "";
-  isSocialAllowanceGranted: string = "";
+  isSocialAllowanceGrantedFamilyOne: string = "";
+  isSocialAllowanceGrantedFamilyTwo: string = "";
   isUniversalParticipationGranted: string = "";
   isDayCareAllowanceGranted: boolean;
   isKleuterToeslagGranted: string = "";
+  isZorgToeslagGranted: string = "";
 
   calculation: Calculation;
 
@@ -41,7 +49,7 @@ export class CalculationComponent implements OnInit {
     }
 
     if (this.isDayCareAllowanceGranted) {
-      entitlements.push(new Entitlement('KINDEROPVANG', 'cat1', this.dayCareDays));
+      entitlements.push(new DayCare('KINDEROPVANG', 'cat1', this.dayCareDays));
     }
 
 
@@ -49,8 +57,16 @@ export class CalculationComponent implements OnInit {
       entitlements.push(new Entitlement('ZORG_WEES', this.isOrphanCareAllowanceGranted));
     }
 
-    if (this.isSocialAllowanceGranted.length > 0) {
-      entitlements.push(new Entitlement('SOCIAAL', this.isSocialAllowanceGranted));
+    if ((this.isSocialAllowanceGrantedFamilyOne.length > 0 && this.housingShareFamilyOne != 0) && this.beneficiaryFamilyOne.length > 0) {
+      entitlements.push(new Social('SOCIAAL', this.isSocialAllowanceGrantedFamilyOne, this.housingShareFamilyOne, this.beneficiaryFamilyOne));
+    } else if ((this.isSocialAllowanceGrantedFamilyOne.length > 0) && (this.housingShareFamilyOne != 0)) {
+      entitlements.push(new Social('SOCIAAL', this.isSocialAllowanceGrantedFamilyOne, this.housingShareFamilyOne));
+    }
+
+    if ((this.isSocialAllowanceGrantedFamilyTwo.length > 0 && this.housingShareFamilyTwo != 0) && this.beneficiaryFamilyTwo.length > 0) {
+      entitlements.push(new Social('SOCIAAL', this.isSocialAllowanceGrantedFamilyTwo, this.housingShareFamilyTwo, this.beneficiaryFamilyTwo));
+    } else if ((this.isSocialAllowanceGrantedFamilyTwo.length > 0) && (this.housingShareFamilyTwo != 0)) {
+      entitlements.push(new Social('SOCIAAL', this.isSocialAllowanceGrantedFamilyTwo, this.housingShareFamilyTwo));
     }
 
     if (this.isUniversalParticipationGranted.length > 0) {
@@ -59,6 +75,10 @@ export class CalculationComponent implements OnInit {
 
     if (this.isKleuterToeslagGranted.length > 0) {
       entitlements.push(new Entitlement('KLEUTER', this.isKleuterToeslagGranted));
+    }
+
+    if (this.isZorgToeslagGranted.length > 0) {
+      entitlements.push(new Entitlement('ZORG_SPECIALE_NODEN', this.isZorgToeslagGranted));
     }
 
 

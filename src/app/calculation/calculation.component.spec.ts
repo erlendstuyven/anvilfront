@@ -9,6 +9,8 @@ import {CalculationRequest} from "./calculation-request";
 import {Entitlement} from "./entitlement";
 import {Category} from "./category";
 import {All} from "tslint/lib/rules/completedDocsRule";
+import {Social} from "./social";
+import {DayCare} from "./daycare";
 
 describe('CalculationComponent', () => {
 
@@ -139,14 +141,16 @@ describe('CalculationComponent', () => {
       component.month = 2;
       component.isBasicAllowanceGranted = true;
       component.isFosterCareAllowanceGranted = false;
-      component.isSocialAllowanceGranted = 'cat1';
+      component.isSocialAllowanceGrantedFamilyOne = 'cat1';
+      component.housingShareFamilyOne = 100;
+      component.beneficiaryFamilyOne = 'thomas';
 
       calculationService.calculation = expectedCalculation;
 
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIS', 'cat1'), new Entitlement('SOCIAAL', 'cat1')]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIS', 'cat1'), new Social('SOCIAAL', 'cat1', 100, 'thomas')]));
     })();
   });
 
@@ -156,7 +160,7 @@ describe('CalculationComponent', () => {
       component.month = 2;
       component.isBasicAllowanceGranted = false;
       component.isFosterCareAllowanceGranted = false;
-      component.isSocialAllowanceGranted = false;
+      component.isSocialAllowanceGrantedFamilyOne = false;
       component.isUniversalParticipationGranted = 'cat1';
 
       calculationService.calculation = expectedCalculation;
@@ -174,7 +178,7 @@ describe('CalculationComponent', () => {
       component.month = 2;
       component.isBasicAllowanceGranted = false;
       component.isFosterCareAllowanceGranted = false;
-      component.isSocialAllowanceGranted = false;
+      component.isSocialAllowanceGrantedFamilyOne = false;
       component.isUniversalParticipationGranted = '';
       component.isDayCareAllowanceGranted = true;
       component.dayCareDays = 20;
@@ -184,7 +188,7 @@ describe('CalculationComponent', () => {
       component.calculate();
 
       expect(component.calculation).toEqual(expectedCalculation);
-      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('KINDEROPVANG', 'cat1', 20)]));
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new DayCare('KINDEROPVANG', 'cat1', 20)]));
     })();
   });
 
@@ -194,7 +198,8 @@ describe('CalculationComponent', () => {
       component.month = 2;
       component.isBasicAllowanceGranted = false;
       component.isFosterCareAllowanceGranted = false;
-      component.isSocialAllowanceGranted = false;
+      component.isSocialAllowanceGrantedFamilyOne = '';
+      component.isSocialAllowanceGrantedFamilyTwo = '';
       component.isUniversalParticipationGranted = '';
       component.isDayCareAllowanceGranted = false;
       component.dayCareDays = 0;
@@ -208,5 +213,42 @@ describe('CalculationComponent', () => {
       expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('KLEUTER', 'cat1')]));
     })();
   });
+
+  it('calculate should delegate to CalculationService when two families receive Social Allowance', () => {
+    inject([CalculationService], (calculationService: CalculationServiceMock) => {
+
+      component.year = 2019;
+      component.month = 2;
+      component.isSocialAllowanceGrantedFamilyOne = 'cat1';
+      component.housingShareFamilyOne = 50;
+      component.beneficiaryFamilyOne = 'thomas';
+      component.isSocialAllowanceGrantedFamilyTwo = 'cat2';
+      component.housingShareFamilyTwo = 50;
+      component.beneficiaryFamilyTwo = 'stefan';
+
+      calculationService.calculation = expectedCalculation;
+
+      component.calculate();
+
+      expect(component.calculation).toEqual(expectedCalculation);
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Social('SOCIAAL', 'cat1', 50, 'thomas'), new Social('SOCIAAL', 'cat2', 50, 'stefan')]));
+    })();
+  });
+
+  it('calculate should delegate to CalculationService when ZorgToeslagNoden is checked', () => {
+    inject([CalculationService], (calculationService: CalculationServiceMock) => {
+      component.year = 2019;
+      component.month = 2;
+      component.isZorgToeslagGranted = 'cat1';
+
+      calculationService.calculation = expectedCalculation;
+
+      component.calculate();
+
+      expect(component.calculation).toEqual(expectedCalculation);
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('ZORG_SPECIALE_NODEN', 'cat1')]));
+    })();
+  });
+
 
 });

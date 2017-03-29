@@ -4,6 +4,8 @@ import {Allowance} from "../../src/app/calculation/allowance";
 import {Entitlement} from "../../src/app/calculation/entitlement";
 import {Category} from "../../src/app/calculation/category";
 import {browser, element, by} from "protractor";
+import {Social} from "../../src/app/calculation/social";
+import {DayCare} from "../../src/app/calculation/daycare";
 
 var mockserver = require('mockserver-grunt');
 var mockServerClient = require('mockserver-client').mockServerClient;
@@ -34,9 +36,11 @@ describe('File Form Page', function () {
         new Allowance('ZORG_PLEEG', 61.79, new Category('cat1', 'pleegzorgtoeslag')),
         new Allowance('ZORG_WEES', 80, new Category('cat1', 'wezentoeslag 50%')),
         new Allowance('SOCIAAL', 50, new Category('cat1', 'sociale toeslag, laag inkomen, max 2 kids')),
+        new Allowance('SOCIAAL', 80, new Category('cat1', 'sociale toeslag, laag inkomen, meer dan 2 kids')),
         new Allowance('PARTICIPATIE_UNIVERSEEL', 20, new Category('cat1', 'universele participatie 0_2')),
         new Allowance('KINDEROPVANG', 31.7, new Category('cat1', 'kinderopvangtoeslag')),
-        new Allowance('KLEUTER', 150, new Category('cat1', 'kleutertoeslag 3 jaar'))
+        new Allowance('KLEUTER', 150, new Category('cat1', 'kleutertoeslag 3 jaar')),
+        new Allowance('ZORG_SPECIALE_NODEN', 80.75, new Category('cat1', 'zorgtoeslag spec. ond. T<6 en 1ep>=4'))
 
       ]
     };
@@ -48,10 +52,12 @@ describe('File Form Page', function () {
         new Entitlement('BASIS', 'cat1'),
         new Entitlement('ZORG_PLEEG', 'cat1'),
         new Entitlement('ZORG_WEES', 'cat1'),
-        new Entitlement('SOCIAAL', 'cat1'),
+        new Social('SOCIAAL', 'cat1', 50, 'thomas'),
+        new Social('SOCIAAL', 'cat1', 100, 'stefan'),
         new Entitlement('PARTICIPATIE_UNIVERSEEL', 'cat1'),
-        new Entitlement('KINDEROPVANG', 'cat1', 10),
-        new Entitlement('KLEUTER', 'cat1')
+        new DayCare('KINDEROPVANG', 'cat1', 10),
+        new Entitlement('KLEUTER', 'cat1'),
+        new Entitlement('ZORG_SPECIALE_NODEN', 'cat1')
       ]
     };
 
@@ -80,11 +86,17 @@ describe('File Form Page', function () {
     page.isBasicAllowanceGranted.click();
     page.isFosterCareAllowanceGranted.click();
     page.isOrphanCareAllowanceGranted('wezentoeslag 50%');
-    page.isSocialAllowanceGranted('sociale toeslag, laag inkomen, max 2 kids');
+    page.isSocialAllowanceGrantedFamilyOne('sociale toeslag, laag inkomen, max 2 kids');
+    page.housingShareFamilyOne(50);
+    page.beneficiaryFamilyOne('thomas');
+    page.isSocialAllowanceGrantedFamilyTwo('sociale toeslag, laag inkomen, meer dan 2 kids');
+    page.housingShareFamilyTwo(100);
+    page.beneficiaryFamilyTwo('stefan');
     page.isUniversalParticipationGranted('universele participatie 0_2');
     page.isDayCareAllowanceGranted.click();
     page.setDayCareDays(10);
     page.isKleuterToeslagGranted('kleutertoeslag 3 jaar');
+    page.isZorgToeslagGranted('zorgtoeslag spec. ond. T<6 en 1ep>=4')
     page.calculate();
 
     // setTimeout function added because daycare implementation causes test to fail. Expectation doesn't wait for the response which takes longer then normal.
@@ -93,10 +105,11 @@ describe('File Form Page', function () {
       expect(page.getAllowanceValue('BASIS')).toEqual('160');
       expect(page.getAllowanceValue('ZORG_PLEEG')).toEqual('61.79');
       expect(page.getAllowanceValue('ZORG_WEES')).toEqual('80');
-      expect(page.getAllowanceValue('SOCIAAL')).toEqual('50');
+      expect(page.getAllowanceValue('SOCIAAL')).toEqual('25');
       expect(page.getAllowanceValue('PARTICIPATIE_UNIVERSEEL')).toEqual('20');
       expect(page.getAllowanceValue('KINDEROPVANG')).toEqual('31.7');
       expect(page.getAllowanceValue('KLEUTER')).toEqual('150');
+      expect(page.getAllowanceValue('ZORG_SPECIALE_NODEN')).toEqual('80.75');
     }, 5000);
 
   });
