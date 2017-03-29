@@ -4,7 +4,7 @@ sprintNr = 20
 fixNr = 0
 
 
-node('jenkins-slave-backend') {
+node('jenkins-slave-frontend') {
     stage('Checkout') {
         checkout scm
 
@@ -15,7 +15,7 @@ node('jenkins-slave-backend') {
 
     stage('Commit') {
         withEnv(getEnvironment()) {
-            sh 'npm run build'
+            sh 'npm install && npm run build'
         }
     }
 
