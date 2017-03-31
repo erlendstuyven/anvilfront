@@ -13,7 +13,6 @@ import {CalculationRequest} from "./calculation-request";
 import {Entitlement} from "./entitlement";
 import {Category} from "./category";
 import {Social} from "./social";
-import {All} from "tslint/lib/rules/completedDocsRule";
 
 describe('CalculationService', () => {
   beforeEach(() => {
