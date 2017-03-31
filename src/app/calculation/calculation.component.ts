@@ -19,7 +19,7 @@ export class CalculationComponent implements OnInit {
   beneficiaryFamilyTwo: string;
   housingShareFamilyOne: number;
   housingShareFamilyTwo: number;
-  isBasicAllowanceGranted: boolean;
+  isBasicAllowanceGranted: string;
   isFosterCareAllowanceGranted: boolean;
   isOrphanCareAllowanceGranted: string = "";
   isSocialAllowanceGrantedFamilyOne: string = "";
@@ -28,6 +28,7 @@ export class CalculationComponent implements OnInit {
   isDayCareAllowanceGranted: boolean;
   isKleuterToeslagGranted: string = "";
   isZorgToeslagGranted: string = "";
+  regimeSelected: string= "";
 
   calculation: Calculation;
 
@@ -41,7 +42,7 @@ export class CalculationComponent implements OnInit {
     let entitlements: Entitlement[] = [];
 
     if (this.isBasicAllowanceGranted) {
-      entitlements.push(new Entitlement('BASIS', 'cat1'));
+      entitlements.push(new Entitlement('BASIS', this.isBasicAllowanceGranted));
     }
 
     if (this.isFosterCareAllowanceGranted) {

@@ -20,14 +20,37 @@
     </div>
   </div>
 
+
+
   <div class="form-group">
-    <label class="col-sm-3">Recht op basisbedrag</label>
-    <div class="col-sm-9">
-      <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="isBasicAllowanceGranted" name="isBasicAllowanceGranted" [(ngModel)]="isBasicAllowanceGranted" />
+    <label class="col-sm-3">Regime</label>
+    <div class="col-sm-3">
+      <div class="form-group row" style="margin-left: 0px;">
+        <select [(ngModel)]="regimeSelected" class="form-control" id="regimeSelected" name="regimeSelected">
+          <option></option>
+          <option value='new'>Nieuw</option>
+          <option value='old'>Oud</option>
+        </select>
       </div>
     </div>
   </div>
+
+  <div class="form-group">
+    <label class="col-sm-3">Recht op basis bedrag</label>
+    <div class="col-sm-3">
+      <div class="form-group row" style="margin-left: 0px;">
+        <select ngSwitch="{{regimeSelected}}" [(ngModel)]="isBasicAllowanceGranted" class="form-control" id="isBasicAllowanceGranted" name="isBasicAllowanceGranted">
+          <option *ngSwitchCase="'new'"></option>
+          <option *ngSwitchCase="'new'" value='cat1'>basisbedrag</option>
+          <option *ngSwitchCase="'old'" value='cat2'>kinderbijslag 3e jongste kind of ouder</option>
+          <option *ngSwitchCase="'old'" value='cat3'>kinderbijslag 2e jongste kind</option>
+          <option *ngSwitchCase="'old'" value='cat4'>kinderbijslag jongste kind</option>
+          <option *ngSwitchCase="'old'" value='cat5'>verhoogde wezenbijslag (50bis)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
 
   <div class="form-group">
     <label class="col-sm-3">Recht op pleegzorg</label>
