@@ -19,6 +19,7 @@ export class CalculationPage {
   private _isDayCareAllowanceGranted = element(by.id('isDayCareAllowanceGranted'));
   private _isKleuterToeslagGranted = element(by.id('isKleuterToeslagGranted'));
   private _isZorgToeslagGranted = element(by.id('isZorgToeslagGranted'));
+  private _isLeeftijdsToeslagGranted = element(by.id('isLeeftijdsToeslagGranted'));
 
   private _total = element(by.id('total'));
 
@@ -105,6 +106,9 @@ export class CalculationPage {
 
   isZorgToeslagGranted(category: string) {
     return this._isZorgToeslagGranted.sendKeys(category);
+  }
+  isLeeftijdsToeslagGranted(category: string) {
+    return this._isLeeftijdsToeslagGranted.sendKeys(category);
   }
 
   getTotal(type)  {

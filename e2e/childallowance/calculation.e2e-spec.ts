@@ -83,7 +83,7 @@ describe('File Form Page', function () {
 
     page.setYear(2019);
     page.setMonth(2);
-    page.regimeSelected('new')
+    page.regimeSelected('Oud')
     page.isBasicAllowanceGranted('kinderbijslag 3e jongste kind of ouder');
     page.isFosterCareAllowanceGranted.click();
     page.isOrphanCareAllowanceGranted('wezentoeslag 50%');
@@ -97,13 +97,14 @@ describe('File Form Page', function () {
     page.isDayCareAllowanceGranted.click();
     page.setDayCareDays(10);
     page.isKleuterToeslagGranted('kleutertoeslag 3 jaar');
-    page.isZorgToeslagGranted('zorgtoeslag spec. ond. T<6 en 1ep>=4')
+    page.isZorgToeslagGranted('zorgtoeslag spec. ond. T<6 en 1ep>=4');
+    page.isLeeftijdsToeslagGranted('leeftijdsbijslag ander kind 6_11');
     page.calculate();
 
     // setTimeout function added because daycare implementation causes test to fail. Expectation doesn't wait for the response which takes longer then normal.
     setTimeout(function () {
 
-      expect(page.getAllowanceValue('BASIS')).toEqual('160');
+      expect(page.getAllowanceValue('BASIS')).toEqual('254.40');
       expect(page.getAllowanceValue('ZORG_PLEEG')).toEqual('61.79');
       expect(page.getAllowanceValue('ZORG_WEES')).toEqual('80');
       expect(page.getAllowanceValue('SOCIAAL')).toEqual('25');
@@ -111,6 +112,7 @@ describe('File Form Page', function () {
       expect(page.getAllowanceValue('KINDEROPVANG')).toEqual('31.7');
       expect(page.getAllowanceValue('KLEUTER')).toEqual('150');
       expect(page.getAllowanceValue('ZORG_SPECIALE_NODEN')).toEqual('80.75');
+      expect(page.getAllowanceValue('LEEFTIJD')).toEqual('31.99');
     }, 5000);
 
   });

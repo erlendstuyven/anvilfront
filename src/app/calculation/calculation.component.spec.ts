@@ -39,7 +39,7 @@ describe('CalculationComponent', () => {
     inject([CalculationService], (calculationService: CalculationServiceMock) => {
       component.year = 2019;
       component.month = 2;
-      component.regimeSelected = 'new';
+      component.regimeSelected = 'Nieuw';
       component.isBasicAllowanceGranted = '';
 
       calculationService.calculation = expectedCalculation;
@@ -57,7 +57,7 @@ describe('CalculationComponent', () => {
     inject([CalculationService], (calculationService: CalculationServiceMock) => {
       component.year = 2019;
       component.month = 2;
-      component.regimeSelected = 'new';
+      component.regimeSelected = 'Nieuw';
       component.isBasicAllowanceGranted = 'cat1';
 
       calculationService.calculation = expectedCalculation;
@@ -73,7 +73,7 @@ describe('CalculationComponent', () => {
     inject([CalculationService], (calculationService: CalculationServiceMock) => {
       component.year = 2019;
       component.month = 2;
-      component.regimeSelected = 'new';
+      component.regimeSelected = 'Nieuw';
       component.isBasicAllowanceGranted = 'cat1';
       component.isFosterCareAllowanceGranted = true;
 
@@ -90,7 +90,7 @@ describe('CalculationComponent', () => {
     inject([CalculationService], (calculationService: CalculationServiceMock) => {
       component.year = 2019;
       component.month = 2;
-      component.regimeSelected = 'new';
+      component.regimeSelected = 'Nieuw';
       component.isBasicAllowanceGranted = '';
       component.isFosterCareAllowanceGranted = true;
 
@@ -107,7 +107,7 @@ describe('CalculationComponent', () => {
     inject([CalculationService], (calculationService: CalculationServiceMock) => {
       component.year = 2019;
       component.month = 2;
-      component.regimeSelected = 'new';
+      component.regimeSelected = 'Nieuw';
       component.isBasicAllowanceGranted = 'cat1';
       component.isFosterCareAllowanceGranted = false;
 
@@ -124,7 +124,7 @@ describe('CalculationComponent', () => {
     inject([CalculationService], (calculationService: CalculationServiceMock) => {
       component.year = 2019;
       component.month = 2;
-      component.regimeSelected = 'new';
+      component.regimeSelected = 'Nieuw';
       component.isBasicAllowanceGranted = 'cat1';
       component.isFosterCareAllowanceGranted = false;
       component.isOrphanCareAllowanceGranted = 'cat1';
@@ -142,7 +142,7 @@ describe('CalculationComponent', () => {
     inject([CalculationService], (calculationService: CalculationServiceMock) => {
       component.year = 2019;
       component.month = 2;
-      component.regimeSelected = 'new';
+      component.regimeSelected = 'Nieuw';
       component.isBasicAllowanceGranted = 'cat1';
       component.isFosterCareAllowanceGranted = false;
       component.isSocialAllowanceGrantedFamilyOne = 'cat1';
@@ -162,7 +162,7 @@ describe('CalculationComponent', () => {
     inject([CalculationService], (calculationService: CalculationServiceMock) => {
       component.year = 2019;
       component.month = 2;
-      component.regimeSelected = 'new';
+      component.regimeSelected = 'Nieuw';
       component.isBasicAllowanceGranted = '';
       component.isFosterCareAllowanceGranted = false;
       component.isSocialAllowanceGrantedFamilyOne = false;
@@ -181,7 +181,7 @@ describe('CalculationComponent', () => {
     inject([CalculationService], (calculationService: CalculationServiceMock) => {
       component.year = 2019;
       component.month = 2;
-      component.regimeSelected = 'new';
+      component.regimeSelected = 'Nieuw';
       component.isBasicAllowanceGranted = '';
       component.isFosterCareAllowanceGranted = false;
       component.isSocialAllowanceGrantedFamilyOne = false;
@@ -202,7 +202,7 @@ describe('CalculationComponent', () => {
     inject([CalculationService], (calculationService: CalculationServiceMock) => {
       component.year = 2019;
       component.month = 2;
-      component.regimeSelected = 'new';
+      component.regimeSelected = 'Nieuw';
       component.isBasicAllowanceGranted = '';
       component.isFosterCareAllowanceGranted = false;
       component.isSocialAllowanceGrantedFamilyOne = '';
@@ -261,7 +261,7 @@ describe('CalculationComponent', () => {
     inject([CalculationService], (calculationService: CalculationServiceMock) => {
       component.year = 2019;
       component.month = 2;
-      component.regimeSelected = 'old';
+      component.regimeSelected = 'Oud';
       component.isBasicAllowanceGranted = 'cat2';
 
       calculationService.calculation = expectedCalculation;
@@ -272,6 +272,23 @@ describe('CalculationComponent', () => {
       expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('BASIS', 'cat2')]));
     })();
   });
+
+  it('calculate should delegate to CalculationService when Oud Regime is selected and Recht op leeftijdsbijslag is selected', () => {
+    inject([CalculationService], (calculationService: CalculationServiceMock) => {
+      component.year = 2019;
+      component.month = 2;
+      component.regimeSelected = 'Oud';
+      component.isLeeftijdsToeslagGranted = 'cat1';
+
+      calculationService.calculation = expectedCalculation;
+
+      component.calculate();
+
+      expect(component.calculation).toEqual(expectedCalculation);
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Entitlement('LEEFTIJD', 'cat1')]));
+    })();
+  });
+
 
 
 });

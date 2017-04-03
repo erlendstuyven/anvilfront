@@ -45,8 +45,8 @@ describe('CalculationService', () => {
       entitlements.push(new Entitlement('PARTICIPATION_UNIVERSAL', 'cat1'));
       entitlements.push(new Entitlement('DAY_CARE', 'cat1'));
       entitlements.push(new Entitlement('KLEUTER_TOESLAG', 'cat1')),
-        entitlements.push(new Entitlement('ZORG_SPECIALE_NODEN', 'cat1'));
-
+      entitlements.push(new Entitlement('ZORG_SPECIALE_NODEN', 'cat1')),
+      entitlements.push(new Entitlement('LEEFTIJD', 'cat1'));
 
       var allowanceBasic: Allowance = new Allowance('BASIC', 160, new Category('cat1', 'basic'));
       var allowanceFosterCare: Allowance = new Allowance('CARE_FOSTER', 61.79, new Category('cat1', 'pleeg'));
@@ -56,7 +56,7 @@ describe('CalculationService', () => {
       var allowanceDayCare: Allowance = new Allowance('DAY_CARE', 3.17, new Category('cat1', 'Kinderopvangtoeslag, groeipakket'));
       var allowanceKleuterToeslag: Allowance = new Allowance('KLEUTER_TOESLAG', 150, new Category('cat1', 'kleutertoeslag 3 jaar'));
       var allowanceZorgSpecialeNodenToeslag: Allowance = new Allowance('ZORG_SPECIALE_NODEN', 80.75, new Category('cat1', 'zorgtoeslag spec. ond. T<6 en 1ep>=4'));
-
+      var allowanceLeeftijdsToeslag: Allowance = new Allowance('LEEFTIJD', 31.99, new Category('cat1', 'leeftijdsbijslag ander kind 6_11'));
 
       let allowances: Allowance[] = [];
       allowances.push(allowanceBasic);
@@ -67,9 +67,10 @@ describe('CalculationService', () => {
       allowances.push(allowanceKleuterToeslag);
       allowances.push(allowanceSociaalToeslag);
       allowances.push(allowanceZorgSpecialeNodenToeslag);
+      allowances.push(allowanceLeeftijdsToeslag);
 
 
-      let calculation: Calculation = new Calculation(2, 2019, 'timestamp', allowances, 580.71);
+      let calculation: Calculation = new Calculation(2, 2019, 'timestamp', allowances, 612.7);
       let calculationRequest: CalculationRequest = new CalculationRequest(2019, 2, entitlements);
 
       mockBackend.connections.subscribe((connection) => {

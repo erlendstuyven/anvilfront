@@ -28,6 +28,7 @@ export class CalculationComponent implements OnInit {
   isDayCareAllowanceGranted: boolean;
   isKleuterToeslagGranted: string = "";
   isZorgToeslagGranted: string = "";
+  isLeeftijdsToeslagGranted: string="";
   regimeSelected: string= "";
 
   calculation: Calculation;
@@ -80,6 +81,10 @@ export class CalculationComponent implements OnInit {
 
     if (this.isZorgToeslagGranted.length > 0) {
       entitlements.push(new Entitlement('ZORG_SPECIALE_NODEN', this.isZorgToeslagGranted));
+    }
+
+    if (this.isLeeftijdsToeslagGranted.length > 0) {
+      entitlements.push(new Entitlement('LEEFTIJD', this.isLeeftijdsToeslagGranted));
     }
 
 

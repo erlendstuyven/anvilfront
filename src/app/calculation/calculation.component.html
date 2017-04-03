@@ -28,8 +28,8 @@
       <div class="form-group row" style="margin-left: 0px;">
         <select [(ngModel)]="regimeSelected" class="form-control" id="regimeSelected" name="regimeSelected">
           <option></option>
-          <option value='new'>Nieuw</option>
-          <option value='old'>Oud</option>
+          <option value='Nieuw'>Nieuw</option>
+          <option value='Oud'>Oud</option>
         </select>
       </div>
     </div>
@@ -40,12 +40,12 @@
     <div class="col-sm-3">
       <div class="form-group row" style="margin-left: 0px;">
         <select ngSwitch="{{regimeSelected}}" [(ngModel)]="isBasicAllowanceGranted" class="form-control" id="isBasicAllowanceGranted" name="isBasicAllowanceGranted">
-          <option *ngSwitchCase="'new'"></option>
-          <option *ngSwitchCase="'new'" value='cat1'>basisbedrag</option>
-          <option *ngSwitchCase="'old'" value='cat2'>kinderbijslag 3e jongste kind of ouder</option>
-          <option *ngSwitchCase="'old'" value='cat3'>kinderbijslag 2e jongste kind</option>
-          <option *ngSwitchCase="'old'" value='cat4'>kinderbijslag jongste kind</option>
-          <option *ngSwitchCase="'old'" value='cat5'>verhoogde wezenbijslag (50bis)</option>
+          <option *ngSwitchCase="'Nieuw'"></option>
+          <option *ngSwitchCase="'Nieuw'" value='cat1'>basisbedrag</option>
+          <option *ngSwitchCase="'Oud'" value='cat2'>kinderbijslag 3e jongste kind of ouder</option>
+          <option *ngSwitchCase="'Oud'" value='cat3'>kinderbijslag 2e jongste kind</option>
+          <option *ngSwitchCase="'Oud'" value='cat4'>kinderbijslag jongste kind</option>
+          <option *ngSwitchCase="'Oud'" value='cat5'>verhoogde wezenbijslag (50bis)</option>
         </select>
       </div>
     </div>
@@ -180,6 +180,24 @@
     </div>
   </div>
 
+  <div *ngIf="regimeSelected ==='Oud'" class="form-group">
+    <label class="col-sm-3">Recht op leeftijdsbijslag</label>
+    <div class="col-sm-3">
+      <div class="form-group row" style="margin-left: 0px;">
+        <select [(ngModel)]="isLeeftijdsToeslagGranted" class="form-control" id="isLeeftijdsToeslagGranted" name="isLeeftijdsToeslagGranted">
+          <option></option>
+          <option value='cat1'>leeftijdsbijslag ander kind 6_11</option>
+          <option value='cat2'>leeftijdsbijslag ander kind 12_17</option>
+          <option value='cat3'>leeftijdsbijslag ander 1e kind 18_24</option>
+          <option value='cat4'>leeftijdsbijslag 1ekind 6_11</option>
+          <option value='cat5'>leeftijdsbijslag 1e kind 12_1</option>
+          <option value='cat6'>leeftijdsbijslag 1e kind 18_24</option>
+          <option value='cat7'>leeftijdsbijslag 1e kind > 25j</option>
+          <option value='cat8'>leeftijdsbijslag ander kind > 25j</option>
+        </select>
+      </div>
+    </div>
+  </div>
 
 </form>
 
@@ -197,6 +215,7 @@
         <td><b>maand</b></td>
         <td><b>jaar</b></td>
         <td><b>type</b></td>
+        <td><b>Regime</b></td>
         <td><b>bedrag</b></td>
         <td><b>datum berekening</b></td>
         <td><b>begunstigde</b></td>
@@ -206,6 +225,7 @@
         <td>{{calculation.month}}</td>
         <td>{{calculation.year}}</td>
         <td>{{allowance.type}}</td>
+        <td>{{regimeSelected}}</td>
         <td>&euro; <span id="allowance_{{allowance.type}}_value">{{allowance.value}}</span></td>
         <td>{{calculation.timestamp}}</td>
         <td *ngIf="allowance.beneficiary">{{allowance.beneficiary}}</td>
@@ -217,7 +237,9 @@
         <td></td>
         <td></td>
         <td>TOTAAL</td>
+        <td></td>
         <td id="total">&euro; {{calculation.total}}</td>
+        <td></td>
         <td></td>
         <td></td>
       </tr>
