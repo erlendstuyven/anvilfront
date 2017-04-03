@@ -35,8 +35,8 @@ describe('File Form Page', function () {
         new Allowance('BASIS', 160, new Category('cat1', 'basisbedrag')),
         new Allowance('ZORG_PLEEG', 61.79, new Category('cat1', 'pleegzorgtoeslag')),
         new Allowance('ZORG_WEES', 80, new Category('cat1', 'wezentoeslag 50%')),
-        new Allowance('SOCIAAL', 50, new Category('cat1', 'sociale toeslag, laag inkomen, max 2 kids')),
-        new Allowance('SOCIAAL', 80, new Category('cat1', 'sociale toeslag, laag inkomen, meer dan 2 kids')),
+        new Allowance('SOCIAAL', 50, new Category('cat4', 'sociale toeslag wl/pensioen jongste kind')),
+        new Allowance('SOCIAAL', 80, new Category('cat5', 'sociale toeslag wl/pensioen 2e jongste kind')),
         new Allowance('PARTICIPATIE_UNIVERSEEL', 20, new Category('cat1', 'universele participatie 0_2')),
         new Allowance('KINDEROPVANG', 31.7, new Category('cat1', 'kinderopvangtoeslag')),
         new Allowance('KLEUTER', 150, new Category('cat1', 'kleutertoeslag 3 jaar')),
@@ -52,8 +52,8 @@ describe('File Form Page', function () {
         new Entitlement('BASIS', 'cat1'),
         new Entitlement('ZORG_PLEEG', 'cat1'),
         new Entitlement('ZORG_WEES', 'cat1'),
-        new Social('SOCIAAL', 'cat1', 50, 'thomas'),
-        new Social('SOCIAAL', 'cat1', 100, 'stefan'),
+        new Social('SOCIAAL', 'cat4', 50, 'thomas'),
+        new Social('SOCIAAL', 'cat5', 100, 'stefan'),
         new Entitlement('PARTICIPATIE_UNIVERSEEL', 'cat1'),
         new DayCare('KINDEROPVANG', 'cat1', 10),
         new Entitlement('KLEUTER', 'cat1'),
@@ -87,10 +87,10 @@ describe('File Form Page', function () {
     page.isBasicAllowanceGranted('kinderbijslag 3e jongste kind of ouder');
     page.isFosterCareAllowanceGranted.click();
     page.isOrphanCareAllowanceGranted('wezentoeslag 50%');
-    page.isSocialAllowanceGrantedFamilyOne('sociale toeslag, laag inkomen, max 2 kids');
+    page.isSocialAllowanceGrantedFamilyOne('sociale toeslag wl/pensioen jongste kind');
     page.housingShareFamilyOne(50);
     page.beneficiaryFamilyOne('thomas');
-    page.isSocialAllowanceGrantedFamilyTwo('sociale toeslag, laag inkomen, meer dan 2 kids');
+    page.isSocialAllowanceGrantedFamilyTwo('sociale toeslag wl/pensioen 2e jongste kind');
     page.housingShareFamilyTwo(100);
     page.beneficiaryFamilyTwo('stefan');
     page.isUniversalParticipationGranted('universele participatie 0_2');
@@ -107,7 +107,8 @@ describe('File Form Page', function () {
       expect(page.getAllowanceValue('BASIS')).toEqual('254.40');
       expect(page.getAllowanceValue('ZORG_PLEEG')).toEqual('61.79');
       expect(page.getAllowanceValue('ZORG_WEES')).toEqual('80');
-      expect(page.getAllowanceValue('SOCIAAL')).toEqual('25');
+      expect(page.getAllowanceValue('SOCIAAL')).toEqual('22.44');
+      expect(page.getAllowanceValue('SOCIAAL')).toEqual('29.06');
       expect(page.getAllowanceValue('PARTICIPATIE_UNIVERSEEL')).toEqual('20');
       expect(page.getAllowanceValue('KINDEROPVANG')).toEqual('31.7');
       expect(page.getAllowanceValue('KLEUTER')).toEqual('150');

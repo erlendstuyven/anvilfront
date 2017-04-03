@@ -42,6 +42,7 @@
         <select ngSwitch="{{regimeSelected}}" [(ngModel)]="isBasicAllowanceGranted" class="form-control" id="isBasicAllowanceGranted" name="isBasicAllowanceGranted">
           <option *ngSwitchCase="'Nieuw'"></option>
           <option *ngSwitchCase="'Nieuw'" value='cat1'>basisbedrag</option>
+          <option *ngSwitchCase="'Oud'"> </option>
           <option *ngSwitchCase="'Oud'" value='cat2'>kinderbijslag 3e jongste kind of ouder</option>
           <option *ngSwitchCase="'Oud'" value='cat3'>kinderbijslag 2e jongste kind</option>
           <option *ngSwitchCase="'Oud'" value='cat4'>kinderbijslag jongste kind</option>
@@ -78,12 +79,25 @@
     <label class="col-sm-3">Recht op sociaaltoeslag Gezin 1</label>
     <div class="form-group row" style="margin-left: 0px;">
       <div class="col-sm-3">
-          <select [(ngModel)]="isSocialAllowanceGrantedFamilyOne" class="form-control"
+          <select ngSwitch="{{regimeSelected}}" [(ngModel)]="isSocialAllowanceGrantedFamilyOne" class="form-control"
                   id="isSocialAllowanceGrantedFamilyOne" name="isSocialAllowanceGrantedFamilyOne">
-            <option></option>
-            <option value='cat1'>sociale toeslag, laag inkomen, max 2 kids</option>
-            <option value='cat2'>sociale toeslag, laag inkomen, meer dan 2 kids</option>
-            <option value='cat3'>sociale toeslag, gemiddeld inkomen, meer dan 2 kids</option>
+            <option *ngSwitchCase="'Nieuw'"> </option>
+            <option *ngSwitchCase="'Nieuw'" value='cat1'>sociale toeslag, laag inkomen, max 2 kids</option>
+            <option *ngSwitchCase="'Nieuw'" value='cat2'>sociale toeslag, laag inkomen, meer dan 2 kids</option>
+            <option *ngSwitchCase="'Nieuw'" value='cat3'>sociale toeslag, gemiddeld inkomen, meer dan 2 kids</option>
+            <option *ngSwitchCase="'Oud'"> </option>
+            <option *ngSwitchCase="'Oud'" value='cat4'>sociale toeslag wl/pensioen jongste kind</option>
+            <option *ngSwitchCase="'Oud'" value='cat5'>sociale toeslag wl/pensioen 2e jongste kind</option>
+            <option *ngSwitchCase="'Oud'" value='cat6'>sociale toeslag wl/pensioen 3e jongste kind of ouder (ander gezin)</option>
+            <option *ngSwitchCase="'Oud'" value='cat7'>sociale toeslag wl/pensioen 3e jongste kind of ouder (éénoudergezin)</option>
+            <option *ngSwitchCase="'Oud'" value='cat8'>sociale toeslag invalide jongste kind</option>
+            <option *ngSwitchCase="'Oud'" value='cat9'>sociale toeslag invalide 2e jongste kind</option>
+            <option *ngSwitchCase="'Oud'" value='cat10'>sociale toeslag invalide 3e jongste kind of ouder (ander gezin)</option>
+            <option *ngSwitchCase="'Oud'" value='cat11'>sociale toeslag invalide 3e jongste kind of ouder (éénoudergezin)</option>
+            <option *ngSwitchCase="'Oud'" value='cat12'>éénoudertoeslag jongste kind</option>
+            <option *ngSwitchCase="'Oud'" value='cat13'>éénoudertoeslag 2e jongste kind</option>
+            <option *ngSwitchCase="'Oud'" value='cat14'>éénoudertoeslag 3e jongste kind of ouder</option>
+
           </select>
           <label class="sr-only" for="housingShareFamilyOne">% huisvesting</label>
           <input type="number" class="form-control" id="housingShareFamilyOne" name="housingShareFamilyOne"
@@ -100,12 +114,24 @@
     <label class="col-sm-3">Recht op sociaaltoeslag Gezin 2</label>
     <div class="form-group row"style="margin-left: 0px;">
       <div class="col-sm-3">
-        <select [(ngModel)]="isSocialAllowanceGrantedFamilyTwo" class="form-control"
+        <select ngSwitch="{{regimeSelected}}" [(ngModel)]="isSocialAllowanceGrantedFamilyTwo" class="form-control"
                 id="isSocialAllowanceGrantedFamilyTwo" name="isSocialAllowanceGrantedFamilyTwo">
-          <option></option>
-          <option value='cat1'>sociale toeslag, laag inkomen, max 2 kids</option>
-          <option value='cat2'>sociale toeslag, laag inkomen, meer dan 2 kids</option>
-          <option value='cat3'>sociale toeslag, gemiddeld inkomen, meer dan 2 kids</option>
+          <option *ngSwitchCase="'Nieuw'"> </option>
+          <option *ngSwitchCase="'Nieuw'" value='cat1'>sociale toeslag, laag inkomen, max 2 kids</option>
+          <option *ngSwitchCase="'Nieuw'" value='cat2'>sociale toeslag, laag inkomen, meer dan 2 kids</option>
+          <option *ngSwitchCase="'Nieuw'" value='cat3'>sociale toeslag, gemiddeld inkomen, meer dan 2 kids</option>
+          <option *ngSwitchCase="'Oud'"> </option>
+          <option *ngSwitchCase="'Oud'" value='cat4'>sociale toeslag wl/pensioen jongste kind</option>
+          <option *ngSwitchCase="'Oud'" value='cat5'>sociale toeslag wl/pensioen 2e jongste kind</option>
+          <option *ngSwitchCase="'Oud'" value='cat6'>sociale toeslag wl/pensioen 3e jongste kind of ouder (ander gezin)</option>
+          <option *ngSwitchCase="'Oud'" value='cat7'>sociale toeslag wl/pensioen 3e jongste kind of ouder (éénoudergezin)</option>
+          <option *ngSwitchCase="'Oud'" value='cat8'>sociale toeslag invalide jongste kind</option>
+          <option *ngSwitchCase="'Oud'" value='cat9'>sociale toeslag invalide 2e jongste kind</option>
+          <option *ngSwitchCase="'Oud'" value='cat10'>sociale toeslag invalide 3e jongste kind of ouder (ander gezin)</option>
+          <option *ngSwitchCase="'Oud'" value='cat11'>sociale toeslag invalide 3e jongste kind of ouder (éénoudergezin)</option>
+          <option *ngSwitchCase="'Oud'" value='cat12'>éénoudertoeslag jongste kind</option>
+          <option *ngSwitchCase="'Oud'" value='cat13'>éénoudertoeslag 2e jongste kind</option>
+          <option *ngSwitchCase="'Oud'" value='cat14'>éénoudertoeslag 3e jongste kind of ouder</option>
         </select>
         <label class="sr-only" for="housingShareFamilyTwo">% huisvesting</label>
         <input type="number" class="form-control" id="housingShareFamilyTwo" name="housingShareFamilyTwo"
@@ -163,18 +189,18 @@
       <div class="form-group row" style="margin-left: 0px;">
         <select [(ngModel)]="isZorgToeslagGranted" class="form-control" id="isZorgToeslagGranted" name="isZorgToeslagGranted">
           <option></option>
-          <option value='cat1'>Cat.1: zorgtoeslag spec. ond. T<6 en 1ep>=4</option>
-          <option value='cat2'>Cat.2: zorgtoeslag spec. ond. 6<=T<=8 en 1ep<4</option>
-          <option value='cat3'>Cat.3: zorgtoeslag spec. ond. 6<=T<=8 en 1ep>=4</option>
-          <option value='cat4'>Cat.4: zorgtoeslag spec. ond. 9<=T<=11 en 1ep<4</option>
-          <option value='cat5'>Cat.5: zorgtoeslag spec. ond. 9<=T<=11 en 1ep>=4</option>
-          <option value='cat6'>Cat.6: zorgtoeslag spec. ond. 12<=T<=14</option>
-          <option value='cat7'>Cat.7: zorgtoeslag spec. ond. 15<=T<=17</option>
-          <option value='cat8'>Cat.8: zorgtoeslag spec. ond. 18<=T<=20</option>
-          <option value='cat9'>Cat.9: zorgtoeslag spec. ond. T>20</option>
-          <option value='cat10'>Cat.10: zorgtoeslag spec. ond. zelfred. 0_3</option>
-          <option value='cat11'>Cat.11: zorgtoeslag spec. ond. zelfred. 4_6</option>
-          <option value='cat12'>Cat.12: zorgtoeslag spec. ond. zelfred. 7_9</option>
+          <option value='cat1'>zorgtoeslag spec. ond. T<6 en 1ep>=4</option>
+          <option value='cat2'>zorgtoeslag spec. ond. 6<=T<=8 en 1ep<4</option>
+          <option value='cat3'>zorgtoeslag spec. ond. 6<=T<=8 en 1ep>=4</option>
+          <option value='cat4'>zorgtoeslag spec. ond. 9<=T<=11 en 1ep<4</option>
+          <option value='cat5'>zorgtoeslag spec. ond. 9<=T<=11 en 1ep>=4</option>
+          <option value='cat6'>zorgtoeslag spec. ond. 12<=T<=14</option>
+          <option value='cat7'>zorgtoeslag spec. ond. 15<=T<=17</option>
+          <option value='cat8'>zorgtoeslag spec. ond. 18<=T<=20</option>
+          <option value='cat9'>zorgtoeslag spec. ond. T>20</option>
+          <option value='cat10'>zorgtoeslag spec. ond. zelfred. 0_3</option>
+          <option value='cat11'>zorgtoeslag spec. ond. zelfred. 4_6</option>
+          <option value='cat12'>zorgtoeslag spec. ond. zelfred. 7_9</option>
         </select>
       </div>
     </div>

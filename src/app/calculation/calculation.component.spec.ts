@@ -290,5 +290,23 @@ describe('CalculationComponent', () => {
   });
 
 
+  it('calculate should delegate to CalculationService when Oud Regime and Recht op sociaaltoeslag are selected', () => {
+    inject([CalculationService], (calculationService: CalculationServiceMock) => {
+      component.year = 2019;
+      component.month = 2;
+      component.regimeSelected = 'Oud';
+      component.isSocialAllowanceGrantedFamilyOne = 'cat4';
+      component.housingShareFamilyOne = 50;
+      component.beneficiaryFamilyOne = 'cristiano';
+
+      calculationService.calculation = expectedCalculation;
+
+      component.calculate();
+
+      expect(component.calculation).toEqual(expectedCalculation);
+      expect(calculationService.params).toEqual(new CalculationRequest(2019, 2, [new Social('SOCIAAL', 'cat4', 50, 'cristiano')]));
+    })();
+  });
+
 
 });
