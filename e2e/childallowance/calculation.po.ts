@@ -5,6 +5,7 @@ export class CalculationPage {
   private yearInput = element(by.id('year'));
   private monthInput = element(by.id('month'));
   private dayCareDays = element(by.id('dayCareDays'));
+  private _regimeSelected = element(by.id('regimeSelected'));
   private _isBasicAllowanceGranted = element(by.id('isBasicAllowanceGranted'));
   private _isFosterCareAllowanceGranted = element(by.id('isFosterCareAllowanceGranted'));
   private _isOrphanCareAllowanceGranted = element(by.id('isOrphanCareAllowanceGranted'));
@@ -52,12 +53,17 @@ export class CalculationPage {
   get isFosterCareAllowanceGranted(): ElementFinder {
     return this._isFosterCareAllowanceGranted;
   }
-  get isBasicAllowanceGranted(): ElementFinder {
-    return this._isBasicAllowanceGranted;
-  }
 
   get isDayCareAllowanceGranted(): ElementFinder {
     return this._isDayCareAllowanceGranted;
+  }
+
+  regimeSelected(category: string) {
+    return this._regimeSelected.sendKeys(category);
+  }
+
+  isBasicAllowanceGranted(category: string) {
+    return this._isBasicAllowanceGranted.sendKeys(category);
   }
 
   isOrphanCareAllowanceGranted(category: string) {

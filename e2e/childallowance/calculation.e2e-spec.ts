@@ -83,7 +83,8 @@ describe('File Form Page', function () {
 
     page.setYear(2019);
     page.setMonth(2);
-    page.isBasicAllowanceGranted.click();
+    page.regimeSelected('new')
+    page.isBasicAllowanceGranted('kinderbijslag 3e jongste kind of ouder');
     page.isFosterCareAllowanceGranted.click();
     page.isOrphanCareAllowanceGranted('wezentoeslag 50%');
     page.isSocialAllowanceGrantedFamilyOne('sociale toeslag, laag inkomen, max 2 kids');
