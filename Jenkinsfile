@@ -1,6 +1,6 @@
 buildNr = "${env.BUILD_NUMBER}"
 releaseNr = 1
-sprintNr = 20
+sprintNr = 22
 fixNr = 0
 
 
