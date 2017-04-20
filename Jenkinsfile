@@ -31,7 +31,7 @@ node('jenkins-slave-frontend') {
         }
     }
 
-    stage('Docker Image') {
+    stage('Build & push docker image') {
         withEnv(getEnvironment()) {
             sh 'sudo docker build --rm -t gp-docker-registry:5000/calculation-ui:$APP_VERSION .'
             sh 'sudo docker push gp-docker-registry:5000/calculation-ui:$APP_VERSION'
@@ -44,7 +44,8 @@ def getEnvironment() {
     def BRANCH_NAME = getBranchName()
     return [
         "BRANCH_NAME=$BRANCH_NAME",
-        "APP_VERSION=${releaseNr}.${sprintNr}.${fixNr}.b${buildNr}" + (BRANCH_NAME == "master" ? "" : "_$BRANCH_NAME")
+        "APP_VERSION=${releaseNr}.${sprintNr}.${fixNr}.b${buildNr}" + (BRANCH_NAME == "master" ? "" : "_$BRANCH_NAME"),
+        "DISPLAY=0:0"
     ]
 }
 
