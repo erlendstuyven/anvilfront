@@ -1,14 +1,16 @@
 {
-  "name": "calculation-ui-poc",
+  "name": "calculation-ui",
   "version": "0.0.0",
   "license": "MIT",
+  "angular-cli": {},
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "ci": "ng test --watch=false && ng build --prod --aot && npm-run-all -s -p -r start-minified e2e"
   },
   "private": true,
   "dependencies": {
