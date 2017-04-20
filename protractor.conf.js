@@ -1,15 +1,17 @@
 // Protractor configuration file, see link for more information
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 
-const { SpecReporter } = require('jasmine-spec-reporter');
+/*global jasmine */
+var SpecReporter = require('jasmine-spec-reporter');
 
 exports.config = {
+  getPageTimeout: 30000,
   allScriptsTimeout: 11000,
   specs: [
     './e2e/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'firefox'
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
@@ -17,14 +19,25 @@ exports.config = {
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000,
-    print: function() {}
+    print: function () {
+    }
   },
-  beforeLaunch: function() {
+  useAllAngular2AppRoots: true,
+  beforeLaunch: function () {
     require('ts-node').register({
-      project: 'e2e/tsconfig.e2e.json'
+      project: 'e2e'
     });
   },
-  onPrepare() {
-    jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
-  }
+  onPrepare: function () {
+    jasmine.getEnv().addReporter(new SpecReporter());
+  },
+  plugins: [{
+    package: 'protractor-screenshoter-plugin',
+    screenshotPath: './build/protractor',
+    writeReportFreq: 'asap',
+    screenshotOnExpect: 'failure',
+    screenshotOnSpec: 'none',
+    withLogs: 'true',
+    clearFoldersBeforeTest: true
+  }]
 };

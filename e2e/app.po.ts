@@ -5,7 +5,7 @@ export class CalculationUiPocPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getTitleText() {
+    return element(by.id('newRegimeTitle')).getText();
   }
 }

@@ -9,6 +9,6 @@ describe('calculation-ui-poc App', () => {
 
   it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getTitleText()).toEqual('Nieuw Regime');
   });
 });
