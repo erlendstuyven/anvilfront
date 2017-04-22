@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { YearMonth} from "../../year-month-input/year-month";
 
 @Component({
-  selector: 'keng-new-regime',
-  templateUrl: './new-regime.component.html'
+  selector: 'anvil-sport-horses',
+  templateUrl: './sport-horses.component.html'
 })
-export class NewRegimeComponent {
+export class SportHorses {
 
   yearMonth: YearMonth = <YearMonth> {};
 

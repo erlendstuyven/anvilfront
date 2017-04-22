@@ -1,19 +1,19 @@
 import {Routes} from '@angular/router';
-import {NewRegimeComponent} from 'app/regimes/new-regime/new-regime.component';
-import {TransitionRegimeComponent} from './regimes/transition-regime/transition-regime.component';
+import {SportHorses} from "./regimes/sport-horses/sport-horses.component";
+import {SaleHorses} from "./regimes/sale-horses/sale-horses.component";
 
 export const routes: Routes = [
   {
     path: '',
-    component: NewRegimeComponent
+    component: SportHorses
   },
   {
-    path: 'newRegime',
-    component: NewRegimeComponent,
+    path: 'sportHorses',
+    component: SportHorses,
 
   },
   {
-    path: 'transitionRegime',
-    component: TransitionRegimeComponent
+    path: 'saleHorses',
+    component: SaleHorses
   }
 ];

@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import {YearMonth} from "../../year-month-input/year-month";
 
 @Component({
-  selector: 'keng-transition-regime',
-  templateUrl: './transition-regime.component.html'
+  selector: 'anvil-transition-regime',
+  templateUrl: './sale-horses.component.html'
 })
-export class TransitionRegimeComponent {
+export class SaleHorses {
   yearMonth: YearMonth = <YearMonth> {};
 
   result: string;

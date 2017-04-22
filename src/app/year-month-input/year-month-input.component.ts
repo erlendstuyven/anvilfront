@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {YearMonth} from "./year-month";
 
 @Component({
-  selector: 'keng-year-month-input',
+  selector: 'anvil-year-month-input',
   templateUrl: './year-month-input.component.html'
 })
 export class YearMonthInputComponent {
