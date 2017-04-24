@@ -5,7 +5,7 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "start": "ng serve --proxy-config=proxy.conf.json",
     "test": "ng test",
     "build": "ng build --prod --aot",
     "preprotractor": "webdriver-manager update --standalone false --gecko false",
