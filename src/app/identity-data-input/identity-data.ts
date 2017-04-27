@@ -1,4 +1,4 @@
 export type IdentityData = {
-  month: number;
-  year: number;
+  name: number;
+  yearOfBirth: number;
 }

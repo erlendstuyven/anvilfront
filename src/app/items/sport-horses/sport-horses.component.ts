@@ -13,8 +13,8 @@ export class SportHorses {
   constructor() { }
 
   showResult = () => {
-    if (this.identityData.month && this.identityData.year) {
-      this.result = 'Aanvraag nieuw regime voor ' + this.identityData.month + '-' + this.identityData.year;
+    if (this.identityData.name && this.identityData.yearOfBirth) {
+      this.result = 'Aanvraag nieuw regime voor ' + this.identityData.name + '-' + this.identityData.yearOfBirth;
     } else {
       this.result = 'BOOOOOM';
     }
