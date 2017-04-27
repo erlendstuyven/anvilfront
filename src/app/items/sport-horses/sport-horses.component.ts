@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { YearMonth} from "../../year-month-input/year-month";
+import { IdentityData} from "../../identity-data-input/identity-data";
 
 @Component({
   selector: 'anvil-sport-horses',
@@ -7,14 +7,14 @@ import { YearMonth} from "../../year-month-input/year-month";
 })
 export class SportHorses {
 
-  yearMonth: YearMonth = <YearMonth> {};
+  identityData: IdentityData = <IdentityData> {};
 
   result: string;
   constructor() { }
 
   showResult = () => {
-    if (this.yearMonth.month && this.yearMonth.year) {
-      this.result = 'Aanvraag nieuw regime voor ' + this.yearMonth.month + '-' + this.yearMonth.year;
+    if (this.identityData.month && this.identityData.year) {
+      this.result = 'Aanvraag nieuw regime voor ' + this.identityData.month + '-' + this.identityData.year;
     } else {
       this.result = 'BOOOOOM';
     }

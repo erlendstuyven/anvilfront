@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {YearMonth} from "../../year-month-input/year-month";
+import {IdentityData} from "../../identity-data-input/identity-data";
 import {RestConnectorService} from "../../rest-connector.service";
 
 @Component({
@@ -13,7 +13,7 @@ export class SaleHorses {
     this.restConnectorService = restConnectorService;
   }
 
-  yearMonth: YearMonth = <YearMonth> {};
+  identityData: IdentityData = <IdentityData> {};
 
   result: string;
 

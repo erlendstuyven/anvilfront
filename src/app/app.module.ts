@@ -4,7 +4,7 @@ import {HttpModule } from '@angular/http';
 
 import {routes} from "./app.routing";
 import {RouterModule} from "@angular/router";
-import {YearMonthInputComponent } from './year-month-input/year-month-input.component';
+import {IdentityDataInputComponent } from './identity-data-input/identity-data-input.component';
 import {NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import {NgModule} from "@angular/core";
 
@@ -21,7 +21,7 @@ import {Home} from './home/home.component';
     MenuComponent,
     SportHorses,
     SaleHorses,
-    YearMonthInputComponent,
+    IdentityDataInputComponent,
     Home
   ],
   imports: [

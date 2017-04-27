@@ -1,4 +1,4 @@
-export type YearMonth = {
+export type IdentityData = {
   month: number;
   year: number;
 }
