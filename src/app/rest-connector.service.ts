@@ -7,9 +7,14 @@ export class RestConnectorService {
 
   constructor(private _http: Http) {}
 
-  public getHorseInformation() {
-     return this._http.get('/api/horses/information')
-       .map(res => res.json());
+  public getHorseName() {
+     return this._http.get('/api/horses/name');
+       // .map(res => res.json());
+  }
+
+ public getHorseInformation() {
+     return this._http.get('/api/horses/information');
+       // .map(res => res.json());
   }
 
 }

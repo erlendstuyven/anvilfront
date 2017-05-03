@@ -17,10 +17,10 @@ export class SaleHorses {
 
   result: string;
 
-  showResult = () => {
-      this.restConnectorService.getHorseInformation()
+  showHorseName = () => {
+      this.restConnectorService.getHorseName()
         .subscribe(
-          data => this.result = JSON.stringify(data),
+          data => this.result = JSON.stringify(data.text()),
           error => alert(error),
           () => console.log("Horse information succesful transferred")
         )
