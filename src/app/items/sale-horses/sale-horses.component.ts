@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {IdentityData} from "../../identity-data-input/identity-data";
 import {RestConnectorService} from "../../rest-connector.service";
+import {HorseInformation} from "./horse-information";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'anvil-transition-regime',
@@ -17,13 +19,27 @@ export class SaleHorses {
 
   result: string;
 
+  horseInformation: HorseInformation;
+
   showHorseName = () => {
       this.restConnectorService.getHorseName()
         .subscribe(
-          data => this.result = JSON.stringify(data.text()),
+          data => this.result = data.text(),
           error => alert(error),
           () => console.log("Horse information succesful transferred")
         )
   }
+
+    showHorseInformation = () => {
+      let subscribe = this.restConnectorService.getHorseInformation()
+        .subscribe(
+          data => this.result = JSON.stringify(data),
+          error => alert(error),
+          () => console.log("Horse information succesful transferred")
+        );
+
+    }
+
+
 
 }

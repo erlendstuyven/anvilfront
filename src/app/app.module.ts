@@ -14,6 +14,10 @@ import {SportHorses} from './items/sport-horses/sport-horses.component';
 import {SaleHorses} from "./items/sale-horses/sale-horses.component";
 import {RestConnectorService} from "./rest-connector.service";
 import {Home} from './home/home.component';
+import {Information} from "./items/information/information.component";
+import {InformationChild} from "./items/information/information-child.component";
+import {Newsletter} from "./items/newsletter/news-letter.component";
+import {InputComponent} from "./shared/components/input/input.component";
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import {Home} from './home/home.component';
     SportHorses,
     SaleHorses,
     IdentityDataInputComponent,
-    Home
+    Information,
+    InformationChild,
+    Home,
+    Newsletter,
+    InputComponent
   ],
   imports: [
     BrowserModule,
