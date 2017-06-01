@@ -15,7 +15,7 @@ import {NgForm} from "@angular/forms";
                 [value]="email"
                 (valueChange)="emailChange($event)"
                 [form]="newsletterForm" 
-                >
+                [myPlaceholder]="'fill in your email address please'">
             </anvil-input>
           </div>
           <div class="col-md-4">
@@ -41,7 +41,7 @@ export class Newsletter {
 
   parentsInformation: string;
 
-  email: string = 'fill in your email adres please';
+  email: string;
 
   submitted: boolean = false;
 

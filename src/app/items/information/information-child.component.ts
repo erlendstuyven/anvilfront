@@ -6,7 +6,7 @@ import {Component, EventEmitter, Output} from "@angular/core";
     <div>
       <h3>'Filly name = Laura Bea Z'</h3>
       <br>
-      <input type="button" value="Show parent information" (click)="showStallionInformation()">
+      <input type="button" value="Show parent information" (click)="showStallionInformation()" class="btn btn-outline-success">
        <br>
      </div>
     `

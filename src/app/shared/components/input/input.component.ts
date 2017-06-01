@@ -28,6 +28,7 @@ import {NgForm} from '@angular/forms';
                    [attr.maxLength]="maxLength ? maxLength : null"
                    [attr.minLength]="minLength ? minLength : null"
                    [required]="isRequired ? '' : null"
+                   [placeholder]="myPlaceholder"
                    >
           </div>
         </div>
@@ -45,6 +46,8 @@ export class InputComponent implements AfterViewInit {
   @Input() isRequired: boolean = false;
   @Input() maxLength: number;
   @Input() minLength: number;
+  @Input() myPlaceholder: string;
+
 
   @ViewChild('childInputForm') thisForm: NgForm;
 
