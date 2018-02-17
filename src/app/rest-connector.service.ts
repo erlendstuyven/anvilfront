@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Http} from "@angular/http";
 import 'rxjs/add/operator/map';
-import {HorseInformation} from "./items/sale-horses/horse-information";
+import {HorseInformation} from "./concepts/sale-horses/horse-information";
 import {Observable} from "rxjs";
 
 @Injectable()

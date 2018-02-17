@@ -1,9 +1,9 @@
 import {Routes} from '@angular/router';
-import {SportHorses} from "./items/sport-horses/sport-horses.component";
-import {SaleHorses} from "./items/sale-horses/sale-horses.component";
+import {SportHorses} from "./concepts/sport-horses/sport-horses.component";
+import {SaleHorses} from "./concepts/sale-horses/sale-horses.component";
 import {Home} from "./home/home.component";
-import {Information} from "./items/information/information.component";
-import {Newsletter} from "./items/newsletter/news-letter.component";
+import {Information} from "./concepts/information/information.component";
+import {Newsletter} from "./concepts/newsletter/news-letter.component";
 
 export const routes: Routes = [
   {
@@ -13,8 +13,8 @@ export const routes: Routes = [
   {
     path: 'home',
     component: Home
-
-  }, {
+  },
+  {
     path: 'sportHorses',
     component: SportHorses
   },
