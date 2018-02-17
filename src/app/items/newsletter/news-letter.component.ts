@@ -1,13 +1,14 @@
-import {Component, Input} from "@angular/core";
-import {NgForm} from "@angular/forms";
+import {Component, Input, ViewChild} from "@angular/core";
+import {Form, FormGroup, NgForm} from "@angular/forms";
 
 @Component({
   selector: 'anvil-news-letter',
   template: `
     <form (ngSubmit)="onSubmit()" #newsletterForm="ngForm">
-          <br />
-          <h4 class="well"> Subscribe to the anvil newsletter </h4>
-          <br/>
+          <div class="col-md-4">
+             <br/>
+             <h4 class="well"> Subscribe to the anvil newsletter </h4>
+          </div>
            
           <div class="col-md-4">
             <anvil-input
@@ -15,7 +16,8 @@ import {NgForm} from "@angular/forms";
                 [value]="email"
                 (valueChange)="emailChange($event)"
                 [form]="newsletterForm" 
-                [myPlaceholder]="'fill in your email address please'">
+                [myPlaceholder]="'fill in your email address please'"
+                [textMask]="'^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$'">
             </anvil-input>
           </div>
           <div class="col-md-4">
@@ -27,9 +29,9 @@ import {NgForm} from "@angular/forms";
              </button>
          </div>
          
-         <div [hidden]="!submitted">
+         <div *ngIf="submitted">
             <br/>
-            {{email}} is submitted
+            {{emailSubmitted}}
          </div>
          <br/>
        
@@ -39,24 +41,26 @@ import {NgForm} from "@angular/forms";
 
 export class Newsletter {
 
+  @ViewChild('newsletterForm') newsletterForm: NgForm;
   parentsInformation: string;
-
   email: string;
-
+  emailSubmitted: string;
   submitted: boolean = false;
-
   isRequired: boolean = true;
 
+
   onSubmit() {
-    this.submitted = true;
-    // this.isRequired = false;
+    console.log("FORM VALUES 1:");
+    if (this.newsletterForm.valid) {
+      this.submitted = true;
+    } else {
+      this.submitted = false;
+    }
   }
 
   emailChange = (email: string) => {
-    if (email) {
-      this.submitted = false;
-      this.email = email;
-    }
+    this.submitted = false;
+    this.emailSubmitted = email + ' is submitted.';
   };
 
 

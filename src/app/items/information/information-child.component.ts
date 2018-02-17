@@ -4,7 +4,7 @@ import {Component, EventEmitter, Output} from "@angular/core";
   selector: 'anvil-information-child',
   template: `
     <div>
-      <h3>'Filly name = Laura Bea Z'</h3>
+      <h4>'Filly name = Laura Bea Z'</h4>
       <br>
       <input type="button" value="Show parent information" (click)="showStallionInformation()" class="btn btn-outline-success">
        <br>

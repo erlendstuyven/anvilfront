@@ -3,7 +3,7 @@ import {Component} from "@angular/core";
 @Component({
   selector: 'anvil-information',
   template: `
-    <div >
+   <div class="col-md-4">
       <br>
       <anvil-information-child (messageToParent)="parentsInformation = $event" > </anvil-information-child>
       <br>

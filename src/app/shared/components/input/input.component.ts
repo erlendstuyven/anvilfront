@@ -24,7 +24,7 @@ import {NgForm} from '@angular/forms';
                    #inputValue="ngModel" 
                    title="{{ form._submitted && !inputValue?.valid ? errorMessage : ''}}"
                    [ngClass]="{'form-control-danger' : form._submitted && !inputValue?.valid}"
-                   [pattern]="pattern"
+                   [pattern]="textMask"
                    [attr.maxLength]="maxLength ? maxLength : null"
                    [attr.minLength]="minLength ? minLength : null"
                    [required]="isRequired ? '' : null"
@@ -47,6 +47,7 @@ export class InputComponent implements AfterViewInit {
   @Input() maxLength: number;
   @Input() minLength: number;
   @Input() myPlaceholder: string;
+  @Input() textMask: string;
 
 
   @ViewChild('childInputForm') thisForm: NgForm;

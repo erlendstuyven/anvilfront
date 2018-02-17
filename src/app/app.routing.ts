@@ -17,7 +17,6 @@ export const routes: Routes = [
   }, {
     path: 'sportHorses',
     component: SportHorses
-
   },
   {
     path: 'saleHorses',
