@@ -18,6 +18,7 @@ import {Information} from "./concepts/information/information.component";
 import {InformationChild} from "./concepts/information/information-child.component";
 import {Newsletter} from "./concepts/newsletter/news-letter.component";
 import {InputComponent} from "./shared/components/input/input.component";
+import {DatatableComponent} from "./concepts/datatable/datatable.component";
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import {InputComponent} from "./shared/components/input/input.component";
     InformationChild,
     Home,
     Newsletter,
-    InputComponent
+    InputComponent,
+    DatatableComponent
   ],
   providers: [RestConnectorService],
   bootstrap: [AppComponent]

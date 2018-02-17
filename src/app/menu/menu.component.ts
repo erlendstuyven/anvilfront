@@ -18,6 +18,9 @@ import { Component, OnInit } from '@angular/core';
       </li>
      <li>
         <a [routerLinkActive]="['active']" [routerLink]="['/newsletter']">Newsletter</a>
+      </li>     
+      <li>
+        <a [routerLinkActive]="['active']" [routerLink]="['/datatable']">Datatable</a>
       </li>
     </ul>
   `,

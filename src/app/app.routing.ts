@@ -4,6 +4,7 @@ import {SaleHorses} from "./concepts/sale-horses/sale-horses.component";
 import {Home} from "./home/home.component";
 import {Information} from "./concepts/information/information.component";
 import {Newsletter} from "./concepts/newsletter/news-letter.component";
+import {DatatableComponent} from "./concepts/datatable/datatable.component";
 
 export const routes: Routes = [
   {
@@ -29,5 +30,9 @@ export const routes: Routes = [
   {
     path: 'newsletter',
     component: Newsletter
+  },
+  {
+    path: 'datatable',
+    component: DatatableComponent
   }
 ];
