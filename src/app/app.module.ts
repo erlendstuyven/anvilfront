@@ -19,6 +19,7 @@ import {InformationChild} from "./concepts/information/information-child.compone
 import {Newsletter} from "./concepts/newsletter/news-letter.component";
 import {InputComponent} from "./shared/components/input/input.component";
 import {DatatableComponent} from "./concepts/datatable/datatable.component";
+import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import {DatatableComponent} from "./concepts/datatable/datatable.component";
     RouterModule.forRoot(routes),
     FormsModule,
     HttpModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    NgxDatatableModule
   ],
   declarations: [
     AppComponent,
