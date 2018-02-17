@@ -3,7 +3,25 @@ import { IdentityData} from "../../identity-data-input/identity-data";
 
 @Component({
   selector: 'anvil-sport-horses',
-  templateUrl: './sport-horses.component.html'
+  template: `
+    <br />
+    <h3 id="newRegimeTitle">Sport horses</h3>
+    
+    <br />
+    <anvil-identity-data-input [identityData]="identityData">
+    </anvil-identity-data-input>
+    <br />
+    <br />
+    
+    <button id="confirmNewRegime" (click)="showResult()" class="btn btn-outline-success" >
+      Horse information
+    </button>
+    
+    <br />
+    <br />
+
+    {{result}}
+  `
 })
 export class SportHorses {
 

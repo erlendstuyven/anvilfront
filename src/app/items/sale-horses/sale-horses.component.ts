@@ -6,8 +6,31 @@ import {Observable} from "rxjs";
 
 @Component({
   selector: 'anvil-transition-regime',
-  templateUrl: './sale-horses.component.html'
+  template: `
+          <br />
+        <h3>Sale horses</h3>
+        <br />
+        <anvil-identity-data-input [identityData]="identityData">
+        </anvil-identity-data-input>
+        <br />
+        <br />
+        
+        <button id="horseName" (click)="showHorseName()" class="btn btn-outline-success">
+          Horse name
+        </button>
+        
+        <button id="horseInformation" (click)="showHorseInformation()" class="btn btn-outline-success">
+          Horse info
+        </button>
+        
+        <br />
+        <br />
+        
+        <h5>{{result}}</h5>
+        <h5>{{horseInformation}}</h5>
+  `
 })
+
 export class SaleHorses {
   private restConnectorService: RestConnectorService;
 
