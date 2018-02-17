@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IdentityData} from "../../identity-data-input/identity-data";
+import { IdentityData} from "../identity-data-input/identity-data";
 
 @Component({
   selector: 'anvil-sport-horses',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IdentityData} from "../../identity-data-input/identity-data";
+import {IdentityData} from "../identity-data-input/identity-data";
 import {RestConnectorService} from "../../rest-connector.service";
 import {HorseInformation} from "./horse-information";
 import {Observable} from "rxjs";

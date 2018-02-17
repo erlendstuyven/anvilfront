@@ -4,22 +4,29 @@ import {HttpModule } from '@angular/http';
 
 import {routes} from "./app.routing";
 import {RouterModule} from "@angular/router";
-import {IdentityDataInputComponent } from './identity-data-input/identity-data-input.component';
+import {IdentityDataInputComponent } from './concepts/identity-data-input/identity-data-input.component';
 import {NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import {NgModule} from "@angular/core";
 
 import {AppComponent } from './app.component';
 import {MenuComponent } from './menu/menu.component';
-import {SportHorses} from './items/sport-horses/sport-horses.component';
-import {SaleHorses} from "./items/sale-horses/sale-horses.component";
+import {SportHorses} from './concepts/sport-horses/sport-horses.component';
+import {SaleHorses} from "./concepts/sale-horses/sale-horses.component";
 import {RestConnectorService} from "./rest-connector.service";
 import {Home} from './home/home.component';
-import {Information} from "./items/information/information.component";
-import {InformationChild} from "./items/information/information-child.component";
-import {Newsletter} from "./items/newsletter/news-letter.component";
+import {Information} from "./concepts/information/information.component";
+import {InformationChild} from "./concepts/information/information-child.component";
+import {Newsletter} from "./concepts/newsletter/news-letter.component";
 import {InputComponent} from "./shared/components/input/input.component";
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(routes),
+    FormsModule,
+    HttpModule,
+    NgbModule.forRoot()
+  ],
   declarations: [
     AppComponent,
     MenuComponent,
@@ -31,13 +38,6 @@ import {InputComponent} from "./shared/components/input/input.component";
     Home,
     Newsletter,
     InputComponent
-  ],
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot(routes),
-    FormsModule,
-    HttpModule,
-    NgbModule.forRoot()
   ],
   providers: [RestConnectorService],
   bootstrap: [AppComponent]
